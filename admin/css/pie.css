@@ -1,0 +1,40 @@
+/*-------------------
+	   PIE
+--------------------*/
+.WEB_PIE .pie_bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  background-color: #f1f1f1;
+  border-top: 1px solid #e1e1e1;
+  padding: 6px 0;
+  color: #333; }
+  .WEB_PIE .pie_bottom ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-end; }
+    .WEB_PIE .pie_bottom ul li {
+      list-style: none;
+      padding: 0 8px; }
+      .WEB_PIE .pie_bottom ul li a {
+        color: #333; }
+      .WEB_PIE .pie_bottom ul li:hover {
+        background: #f4f4f4; }
+      .WEB_PIE .pie_bottom ul li .icon {
+        margin: 0; }
+  .WEB_PIE .pie_bottom a {
+    color: #607d8b; }
+    .WEB_PIE .pie_bottom a:hover {
+      color: #999; }
+  .WEB_PIE .pie_bottom .copyright {
+    margin: 0 auto; }
+
+.inicio .WEB_PIE .pie_bottom {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #999;
+  border-top: 0; }
+
+/*# sourceMappingURL=pie.css.map */

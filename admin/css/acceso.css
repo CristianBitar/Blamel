@@ -1,0 +1,226 @@
+.ACCESO {
+  display: flex;
+  justify-content: center;
+  height: calc(100% - 82px);
+  align-items: center;
+  /* ---------- INTRODUCCION ---------- */
+  /* ---------- LOGIN ---------- */ }
+  @media all and (-ms-high-contrast: none) {
+    .ACCESO {
+      display: block;
+      height: 100%;
+      margin-top: 100px; } }
+  .ACCESO .introduccion {
+    color: #fff;
+    padding: 20px 70px 20px; }
+    .ACCESO .introduccion h1.titular {
+      color: #fff;
+      font-size: 65px;
+      line-height: 65px;
+      letter-spacing: -3px;
+      font-weight: 300; }
+      .ACCESO .introduccion h1.titular strong {
+        font-weight: 800; }
+      @media (max-width: 1200px) {
+        .ACCESO .introduccion h1.titular {
+          font-size: 55px;
+          line-height: 60px; } }
+      @media (max-width: 990px) {
+        .ACCESO .introduccion h1.titular {
+          font-size: 46px;
+          line-height: 50px; } }
+      @media (max-width: 768px) {
+        .ACCESO .introduccion h1.titular {
+          font-size: 40px;
+          line-height: 45px;
+          letter-spacing: -2px; } }
+      @media (max-width: 468px) {
+        .ACCESO .introduccion h1.titular {
+          font-size: 30px;
+          line-height: 35px;
+          letter-spacing: -2px; } }
+    @media (max-width: 1200px) {
+      .ACCESO .introduccion {
+        padding: 20px 60px 20px; } }
+    @media (max-width: 990px) {
+      .ACCESO .introduccion {
+        padding: 10px 30px;
+        margin-top: 20px; } }
+    .ACCESO .introduccion .texto p {
+      font-size: 18px;
+      font-weight: 100; }
+      @media (max-width: 468px) {
+        .ACCESO .introduccion .texto p {
+          font-size: 16px;
+          line-height: 24px; } }
+  .ACCESO .login {
+    z-index: 0;
+    align-items: center;
+    padding: 60px 40px 60px;
+    min-width: 100%;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 90px -10px rgba(0, 0, 0, 0.6);
+    position: relative;
+    text-align: center; }
+    @media (max-width: 990px) {
+      .ACCESO .login {
+        margin-top: 10px;
+        padding: 30px 40px 30px; } }
+    @media (max-width: 480px) {
+      .ACCESO .login {
+        padding: 10px 30px 20px;
+        margin-top: 10px;
+        margin-bottom: 80px; } }
+    .ACCESO .login .titulo {
+      display: flex;
+      justify-content: center;
+      padding: 0 0 20px;
+      color: #fff;
+      font-size: 20px;
+      min-width: 100%; }
+    .ACCESO .login .logo {
+      padding-top: 0px;
+      padding-bottom: 45px; }
+      .ACCESO .login .logo img {
+        margin: 0 auto;
+        width: 350px; }
+        @media (max-width: 480px) {
+          .ACCESO .login .logo img {
+            width: 80%; } }
+      @media (max-width: 480px) {
+        .ACCESO .login .logo {
+          padding-top: 10px;
+          padding-bottom: 30px; } }
+    .ACCESO .login a {
+      color: #fff; }
+      .ACCESO .login a:hover {
+        color: #ddd; }
+    .ACCESO .login p span {
+      padding-left: 5px; }
+    .ACCESO .login form .nota {
+      color: #fff;
+      font-size: 13px; }
+      .ACCESO .login form .nota a {
+        color: #fff;
+        font-weight: bold;
+        transition: all 0.3s ease; }
+        .ACCESO .login form .nota a:hover {
+          text-decoration: underline; }
+    .ACCESO .login form input {
+      height: 50px;
+      flex: 1; }
+    .ACCESO .login form input[type="text"], .ACCESO .login form input[type="password"], .ACCESO .login form input[type="email"] {
+      background-color: rgba(85, 85, 85, 0.28);
+      border-radius: 0px 3px 3px 0px;
+      margin-bottom: 15px;
+      padding: 0 16px;
+      width: 100% !important;
+      color: #fff; }
+    .ACCESO .login form input[type="text"]:focus, .ACCESO .login form input[type="password"]:focus, .ACCESO .login form input[type="email"]:focus {
+      outline: 0;
+      -webkit-box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: inset 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+      border: 0px solid #C4CACE; }
+    .ACCESO .login form .group {
+      text-align: center;
+      display: flex;
+      flex-wrap: nowrap;
+      position: relative;
+      margin: 0 0 5px; }
+      .ACCESO .login form .group span.icono {
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 3px 0px 0px 3px;
+        color: #ffffff;
+        display: block;
+        float: left;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        width: 50px;
+        font-size: 18px;
+        border: 0; }
+      .ACCESO .login form .group label {
+        flex: 1; }
+        .ACCESO .login form .group label.readonly {
+          cursor: not-allowed; }
+          .ACCESO .login form .group label.readonly input {
+            cursor: not-allowed; }
+        .ACCESO .login form .group label span.error {
+          font-weight: normal;
+          margin: -8px 0 5px 0;
+          color: #ffffff !important;
+          text-align: left;
+          padding: 0 10px; }
+        .ACCESO .login form .group label.error input[type="text"], .ACCESO .login form .group label.error input[type="password"], .ACCESO .login form .group label.error input[type="email"] {
+          background-color: rgba(189, 20, 20, 0.5) !important;
+          border: 0;
+          box-shadow: inset 0px 0px 0px 2px #d9534f; }
+    .ACCESO .login .bt_login {
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-weight: 500;
+      margin-bottom: 2em;
+      text-transform: uppercase;
+      width: 100%;
+      height: 50px;
+      border: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.5em;
+      padding: 14px;
+      text-align: center; }
+      .ACCESO .login .bt_login:hover {
+        background-color: #000000; }
+    .ACCESO .login .bt_enviar {
+      border-radius: 3px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-weight: 500;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      height: 50px;
+      border: none;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.5em;
+      padding: 14px;
+      text-align: center; }
+      .ACCESO .login .bt_enviar:hover {
+        background-color: #000000; }
+    .ACCESO .login .error-message {
+      padding: 15px;
+      color: white;
+      background-color: rgba(244, 67, 54, 0.5);
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      border-radius: 3px;
+      align-items: center; }
+      .ACCESO .login .error-message i {
+        margin-right: 10px;
+        font-size: 20px;
+        font-weight: normal; }
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #ddd; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #ddd; }
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #ddd; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #ddd; }
+
+/*# sourceMappingURL=acceso.css.map */
