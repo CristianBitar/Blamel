@@ -33,7 +33,7 @@ $logo = $_SESSION['logo'];
         <span class="navbar-toggle-icon"><span class="toggle-line"></span></span>
       </button>
 
-    </div><a class="navbar-brand" href="listado_profesores">
+    </div><a class="navbar-brand" href="listado_ots">
       <div class="d-flex align-items-center py-3"><img class="me-2 img" src="<?php echo $logo ?>" alt="" width="100" />
       </div>
     </a>

@@ -42,7 +42,7 @@ require_once("../nucleo/conexion.php");
                 $_SESSION['id'] = $id;
                 $_SESSION['tipo'] = $tipo;
                 //   $_SESSION['foto'] = $foto;
-                $_SESSION['logo'] = './img/background.jpg'; //'./img/avatar2.png'
+                $_SESSION['logo'] = './img/background.png'; //'./img/avatar2.png'
                 $result->free();
 
                 //LOGS ACCESO
@@ -68,7 +68,7 @@ require_once("../nucleo/conexion.php");
                 $stmt->close();
 
                 //FIN LOGS ACCESO
-                header("Location: ./listado_profesores");
+                header("Location: ./listado_ots");
             } else {
                 //LOGS ACCESO
                 $ipacceso = $_SERVER['REMOTE_ADDR'];
@@ -184,7 +184,7 @@ require_once("../nucleo/conexion.php");
         </script> -->
         <div class="row min-vh-100 bg-100">
           <div class="col-6 d-none d-lg-block position-relative">
-            <div class="bg-holder" style="background-image:url(./img/background.jpg);background-position: 50% 20%;">
+            <div class="bg-holder" style="background-image:url(./img/login_background.png);background-position: 50% 20%;">
             </div>
             <!--/.bg-holder-->
 

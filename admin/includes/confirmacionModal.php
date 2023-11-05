@@ -6,7 +6,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="col-md-12 col-sm-12 col-xs-12">
-					<input id="teacherName" type="text" name="nombre" class="form-control col-md-7 col-xs-12" data- name="name" type="text" disabled>
+					<input id="modalInputName" type="text" name="nombre" class="form-control col-md-7 col-xs-12" data- name="name" type="text" disabled>
 				</div>
 			</div>
 			<br>

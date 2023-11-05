@@ -2,30 +2,49 @@
   <div class="navbar-vertical-content scrollbar">
     <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
       <li class="nav-item">
-        <a class="nav-link" href="listado_profesores" role="button" data-bs-toggle="" aria-expanded="false">
-          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="far fa-list-alt"></span> </span><span class="nav-link-text ps-1">Docentes</span>
+        <a class="nav-link" href="listado_ots" role="button" data-bs-toggle="" aria-expanded="false">
+          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="far fa-list-alt"></span> </span><span class="nav-link-text ps-1">OTS</span>
           </div>
         </a>
-        <a class="nav-link" href="listado_centros" role="button" data-bs-toggle="" aria-expanded="false">
-          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-warehouse"></span> </span><span class="nav-link-text ps-1">Centros</span>
+      </li>
+
+
+      <li class="nav-item">
+        <!-- label-->
+        <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+          <div class="col-auto navbar-vertical-label">Utilidades
+          </div>
+          <div class="col ps-0">
+            <hr class="mb-0 navbar-vertical-divider" />
+          </div>
+        </div>
+        <a class="nav-link dropdown-indicator" href="#user" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="user">
+          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-wrench"></span></span><span class="nav-link-text ps-1">Configuración</span>
           </div>
         </a>
-        <a class="nav-link" href="listado_alumnos" role="button" data-bs-toggle="" aria-expanded="false">
-          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-user"></span> </span><span class="nav-link-text ps-1">Alumnos</span>
-          </div>
-        </a>
-        <a class="nav-link" href="listado_niveles" role="button" data-bs-toggle="" aria-expanded="false">
-          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas far fa-chart-bar"></span> </span><span class="nav-link-text ps-1">Niveles</span>
-          </div>
-        </a>
-        <a class="nav-link" href="listado_cursos" role="button" data-bs-toggle="" aria-expanded="false">
-          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas far fa-address-book"></span> </span><span class="nav-link-text ps-1">Cursos</span>
-          </div>
-        </a>
-        <a class="nav-link" href="listado_grupos" role="button" data-bs-toggle="" aria-expanded="false">
-          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas far fa-address-card"></span> </span><span class="nav-link-text ps-1">Grupos</span>
-          </div>
-        </a>
+        <ul class="nav collapse" id="user">
+          <li class="nav-item"><a class="nav-link" href="listado_trabajadores" data-bs-toggle="" aria-expanded="false">
+              <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Trabajadores</span>
+              </div>
+            </a>
+
+          </li>
+          <li class="nav-item"><a class="nav-link" href="listado_clientes" data-bs-toggle="" aria-expanded="false">
+              <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Clientes</span>
+              </div>
+            </a>
+
+          </li>
+          <li class="nav-item"><a class="nav-link" href="listado_logs" data-bs-toggle="" aria-expanded="false">
+              <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Log acceso</span>
+              </div>
+            </a>
+
+          </li>
+
+        </ul>
+
+      </li>
     </ul>
   </div>
 </div>
@@ -59,3 +78,26 @@
     }
   });
 </script>
+
+<!-- <a class="nav-link dropdown-indicator" href="#events" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="events">
+          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-wrench"></span></span><span class="nav-link-text ps-1">Configuración</span>
+          </div>
+        </a>
+        <ul class="nav collapse" id="events">
+          <li class="nav-item"><a class="nav-link" href="listado_trabajadores" data-bs-toggle="" aria-expanded="false">
+              <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Trabajadores</span>
+              </div>
+            </a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="listado_clientes" data-bs-toggle="" aria-expanded="false">
+              <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Clientes</span>
+              </div>
+            </a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="listado_logs" data-bs-toggle="" aria-expanded="false">
+              <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Logs</span>
+              </div>
+            </a>
+          </li>
+
+        </ul> -->
