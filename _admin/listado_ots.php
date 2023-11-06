@@ -98,7 +98,7 @@ include('./controller/ots/buscar_otss.php');
                                                 <th class="sort" data-sort="cliente">cliente</th>
                                                 <th class="sort" data-sort="direccion">Dirección</th>
                                                 <th class="sort" data-sort="telefono">Teléfono</th>
-                                                <th></th>
+                                                <th class="sort"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="tBody">

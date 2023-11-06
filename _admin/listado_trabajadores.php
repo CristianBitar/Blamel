@@ -98,7 +98,7 @@ include('./controller/trabajador/buscar_trabajadores.php');
                                                 <th class="sort" data-sort="fecha_nacimiento">Fecha nacimiento</th>
                                                 <th class="sort" data-sort="telefono">Teléfono</th>
                                                 <th class="sort" data-sort="email">Email</th>
-                                                <th></th>
+                                                <th class="sort"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="tBody">

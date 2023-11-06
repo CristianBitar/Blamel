@@ -98,7 +98,7 @@ include('./controller/cliente/buscar_clientes.php');
                                                 <th class="sort" data-sort="ciudad">Ciudad</th>
                                                 <th class="sort" data-sort="telefono_principal">Teléfono</th>
                                                 <th class="sort" data-sort="telefono">Email</th>
-                                                <th></th>
+                                                <th class="sort"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="tBody">

@@ -87,7 +87,6 @@ include('./controller/logs/buscar_logs.php');
                                 <div class="x_content">
                                     <p class="text-muted font-13 m-b-30">
                                         Listado de accesos. Se muestran los datos más relevantes. Utilice el buscador para localizar un registro
-
                                     </p>
 
                                     <table id="userTable" class="table mb-0 data-table fs--1">
