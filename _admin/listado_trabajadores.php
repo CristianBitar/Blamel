@@ -27,7 +27,7 @@ if (!isset($_SESSION['tout'])) {
 
 <!-- GET  -->
 <?php
-// include('./controller/curso/buscar_cursos.php');
+include('./controller/trabajador/buscar_trabajadores.php');
 ?>
 
 
@@ -77,7 +77,7 @@ if (!isset($_SESSION['tout'])) {
                                     </div>
                                     <div class="col-auto ms-auto">
                                         <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                                            <a href="./alta_curso" class="btn btn-falcon-success btn-sm" type="button"><span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span> <span class="ms-1">Nuevo Trabajador</span></a>
+                                            <a href="./alta_trabajador" class="btn btn-falcon-success btn-sm" type="button"><span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span> <span class="ms-1">Nuevo Trabajador</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -85,19 +85,42 @@ if (!isset($_SESSION['tout'])) {
 
 
                             <div class="card-body bg-light">
-                                <div class="x_content" id="tableContainer">
+                                <div class="x_content">
+                                <p class="text-muted font-13 m-b-30">
+                                        Listado de trabajadores. Se muestran los datos más relevantes. Utilice el buscador para localizar un registro
+                                    </p>
+
                                     <table id="userTable" class="table mb-0 data-table fs--1">
                                         <thead class="bg-200 text-900">
                                             <tr>
                                                 <th class="sort" data-sort="nombre">Nombre</th>
-                                                <th class="sort" data-sort="idioma">Idioma</th>
-                                                <th class="sort" data-sort="nivel">Nivel</th>
-                                                <th class="sort" data-sort="fecha_inicio">Fecha de inicio</th>
-                                                <th class="sort" data-sort="fecha_fin">Fecha de finalizacion</th>
+                                                <th class="sort" data-sort="primer_apellido">Apellido</th>
+                                                <th class="sort" data-sort="fecha_nacimiento">Fecha nacimiento</th>
+                                                <th class="sort" data-sort="telefono">Teléfono</th>
+                                                <th class="sort" data-sort="email">Email</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        
+                                        <tbody id="tBody">
+                                            <?php
+                                                for ($recorrer = 0; $recorrer < count($listado_trabajadores); $recorrer++) {
+                                                ?>
+                                                    <tr>
+                                                    <td class="nombre"><?php echo $listado_trabajadores[$recorrer]['nombre']; ?></td>
+                                                    <td class="primer_apellido"><?php echo $listado_trabajadores[$recorrer]['primer_apellido']; ?></td>
+                                                    <td class="fecha_nacimiento"><?php echo $listado_trabajadores[$recorrer]['fecha_nacimiento']; ?></td>
+                                                    <td class="telefono"><?php echo $listado_trabajadores[$recorrer]['telefono']; ?></td>
+                                                    <td class="email"><?php echo $listado_trabajadores[$recorrer]['email']; ?></td>
+                                                    <td class="text-end">
+                                                        <div>
+                                                        <a href="./editar_trabajador?id=<?php echo $listado_trabajadores[$recorrer]['id']; ?>" target='_self' class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver"><span class="text-500 fas fa-edit"></span></a>
+                                                        </div>
+                                                    </td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                            ?>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

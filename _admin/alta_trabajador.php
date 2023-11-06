@@ -71,7 +71,7 @@
 							<div class="card-header">
 								<div class="row flex-between-end">
 									<div class="col-auto align-self-center">
-										<h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>Alta ficha Cliente </small></h5>
+										<h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>Alta ficha Trabajador </small></h5>
 									</div>
 									<div class="col-auto ms-auto">
 
@@ -80,7 +80,7 @@
 							</div>
 
 							<!-- FORMULARIO CURSO  -->
-							<?php include("components/formulario_cliente.php"); ?>
+							<?php include("components/formulario_trabajador.php"); ?>
 							<!-- FIN contenido -->
 						</div>
 					</div>

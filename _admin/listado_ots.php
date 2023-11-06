@@ -85,7 +85,11 @@ include('./controller/ots/buscar_otss.php');
 
 
                             <div class="card-body bg-light">
-                                <div class="x_content" id="tableContainer">
+                                <div class="x_content">
+                                    <p class="text-muted font-13 m-b-30">
+                                        Listado de ots. Se muestran los datos más relevantes. Utilice el buscador para localizar un registro
+                                    </p>
+
                                     <table id="userTable" class="table mb-0 data-table fs--1">
                                         <thead class="bg-200 text-900">
                                             <tr>
@@ -99,9 +103,9 @@ include('./controller/ots/buscar_otss.php');
                                         </thead>
                                         <tbody id="tBody">
                                             <?php
-                                                for ($recorrer = 0; $recorrer < count($listado_ots); $recorrer++) {
-                                                ?>
-                                                    <tr>
+                                            for ($recorrer = 0; $recorrer < count($listado_ots); $recorrer++) {
+                                            ?>
+                                                <tr>
                                                     <td class="nombre"><?php echo $listado_ots[$recorrer]['nombre']; ?></td>
                                                     <td class="fecha_hora"><?php echo $listado_ots[$recorrer]['fecha_hora']; ?></td>
                                                     <td class="cliente"><?php echo $listado_ots[$recorrer]['cliente']; ?></td>
@@ -109,12 +113,12 @@ include('./controller/ots/buscar_otss.php');
                                                     <td class="telefono"><?php echo $listado_ots[$recorrer]['telefono']; ?></td>
                                                     <td class="text-end">
                                                         <div>
-                                                        <a href="./editar_ots?id=<?php echo $listado_ots[$recorrer]['id']; ?>" target='_self' class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver"><span class="text-500 fas fa-edit"></span></a>
+                                                            <a href="./editar_ots?id=<?php echo $listado_ots[$recorrer]['id']; ?>" target='_self' class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver"><span class="text-500 fas fa-edit"></span></a>
                                                         </div>
                                                     </td>
-                                                    </tr>
-                                                <?php
-                                                }
+                                                </tr>
+                                            <?php
+                                            }
                                             ?>
                                         </tbody>
                                     </table>

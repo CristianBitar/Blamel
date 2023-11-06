@@ -86,6 +86,10 @@ include('./controller/cliente/buscar_clientes.php');
 
                             <div class="card-body bg-light">
                                 <div class="x_content" id="tableContainer">
+                                    <p class="text-muted font-13 m-b-30">
+                                        Listado de clientes. Se muestran los datos más relevantes. Utilice el buscador para localizar un registro
+                                    </p>
+
                                     <table id="userTable" class="table mb-0 data-table fs--1">
                                         <thead class="bg-200 text-900">
                                             <tr>
@@ -99,9 +103,9 @@ include('./controller/cliente/buscar_clientes.php');
                                         </thead>
                                         <tbody id="tBody">
                                             <?php
-                                                for ($recorrer = 0; $recorrer < count($listado_clientes); $recorrer++) {
-                                                ?>
-                                                    <tr>
+                                            for ($recorrer = 0; $recorrer < count($listado_clientes); $recorrer++) {
+                                            ?>
+                                                <tr>
                                                     <td class="nombre"><?php echo $listado_clientes[$recorrer]['nombre']; ?></td>
                                                     <td class="direccion"><?php echo $listado_clientes[$recorrer]['direccion']; ?></td>
                                                     <td class="ciudad"><?php echo $listado_clientes[$recorrer]['ciudad']; ?></td>
@@ -109,12 +113,12 @@ include('./controller/cliente/buscar_clientes.php');
                                                     <td class="email"><?php echo $listado_clientes[$recorrer]['email']; ?></td>
                                                     <td class="text-end">
                                                         <div>
-                                                        <a href="./editar_cliente?id=<?php echo $listado_clientes[$recorrer]['id']; ?>" target='_self' class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver"><span class="text-500 fas fa-edit"></span></a>
+                                                            <a href="./editar_cliente?id=<?php echo $listado_clientes[$recorrer]['id']; ?>" target='_self' class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver"><span class="text-500 fas fa-edit"></span></a>
                                                         </div>
                                                     </td>
-                                                    </tr>
-                                                <?php
-                                                }
+                                                </tr>
+                                            <?php
+                                            }
                                             ?>
                                         </tbody>
                                     </table>
