@@ -52,6 +52,7 @@
 	<!--    Main Content-->
 	<!-- ===============================================-->
 	<!-- Modal -->
+	<?php include("includes/confirmacionModal.php"); ?>
 	<?php include("components/modal_error.php"); ?>
 
 	<main class="main" id="top">
@@ -71,7 +72,7 @@
 							<div class="card-header">
 								<div class="row flex-between-end">
 									<div class="col-auto align-self-center">
-										<h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>Alta ficha OT </small></h5>
+										<h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>Modificar ficha Cliente </small></h5>
 									</div>
 									<div class="col-auto ms-auto">
 
@@ -80,7 +81,7 @@
 							</div>
 
 							<!-- FORMULARIO CURSO  -->
-							<?php include("components/formulario_ots.php"); ?>
+							<?php include("components/formulario_cliente.php"); ?>
 							<!-- FIN contenido -->
 						</div>
 					</div>
@@ -100,7 +101,7 @@
 	<!--    JavaScripts-->
 	<!-- ===============================================-->
 	<?php include("includes/javascripts.php"); ?>
-	<script src="./functions/common_functions.js"> </script>
+	<!-- <script src="./functions/common_functions.js"> </script> -->
 	<script src="./vendors/jquery/jquery.min.js"> </script>
     <script src="./vendors/datatables.net/jquery.dataTables.min.js"></script>
     <script src="./vendors/datatables.net-bs5/dataTables.bootstrap5.min.js"> </script>

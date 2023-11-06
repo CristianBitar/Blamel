@@ -35,20 +35,37 @@
     // ************** POST **************
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre = $mysqli->real_escape_string($_POST['nombre']);
-        $id_trabajador=$mysqli -> real_escape_string($_POST['id_trabajador']);
-        $id_ots = $mysqli->real_escape_string($_POST['id_ots']);
+        $fecha_hora=$mysqli -> real_escape_string($_POST['fecha_hora']);
+        $cliente = $mysqli->real_escape_string($_POST['cliente']);
+        $estado = $mysqli->real_escape_string($_POST['estado']);
+        $direccion = $mysqli->real_escape_string($_POST['direccion']);
+        $telefono = $mysqli->real_escape_string($_POST['telefono']);
+        $contacto=$mysqli -> real_escape_string($_POST['contacto']);
+        $materiales = $mysqli->real_escape_string($_POST['materiales']);
+        $notas = $mysqli->real_escape_string($_POST['notas']);
 
-
-        $query = "INSERT INTO trabajadores_asignados (
+        $query = "INSERT INTO ots (
         id, 
         nombre, 
-        id_trabajador, 
-        id_ots,
+        fecha_hora, 
+        cliente, 
+        estado,
+        direccion, 
+        telefono, 
+        contacto, 
+        materiales, 
+        notas, 
         fecha_alta) VALUES 
                     (NULL,
                     '$nombre',
-                    '$id_trabajador',
-                    '$id_ots', 
+                    '$fecha_hora',
+                    '$cliente', 
+                    '$estado',
+                    '$direccion', 
+                    '$telefono', 
+                    '$contacto',
+                    '$materiales',
+                    '$notas',
                     NOW());";
 
         /* Prepare statement */
@@ -61,9 +78,9 @@
         // Execute statement
         $stmt->execute();
 
-        $id_centro = $mysqli->insert_id;
+        $id_ots = $mysqli->insert_id;
 
-        echo json_encode($id_centro); 
+        echo json_encode($id_ots); 
         
         // close statement
         $stmt->close();

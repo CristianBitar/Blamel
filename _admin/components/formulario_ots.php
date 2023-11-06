@@ -19,13 +19,13 @@
 
             <label class="col-sm-2 col-form-label" for="nombre">Nº OT</label>
             <div class="col-sm-6">
-                <input class="form-control" type="text" id="nombre" name="nombre" required/>
+                <input class="form-control" type="text" id="nombre" name="nombre" required />
                 <div class="mb-3 row"></div>
             </div>
 
             <label class="col-sm-2 col-form-label" for="fecha_hora">Fecha y Hora</label>
             <div class="col-sm-2">
-                <input class="form-control" type="date" id="fecha_hora" name="fecha_hora" required/>
+                <input class="form-control" type="date" id="fecha_hora" name="fecha_hora" required />
                 <div class="mb-3 row"></div>
             </div>
 
@@ -47,31 +47,24 @@
             <div class="col-sm-9">
                 <select class="form-select" multiple id="trabajadores_asignados" name="trabajadores_asignados" required>
                 </select>
-                <!-- <select class="select form-select" multiple data-mdb-placeholder="Example placeholder" id="trabajadores_asignados" name="trabajadores_asignados" multiple>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                    <option value="5">Five</option>
-                    </select> -->
                 <div class="mb-3 row"></div>
             </div>
 
             <label class="col-sm-2 col-form-label" for="direccion">Dirección</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" id="direccion" name="direccion" required/>
+                <input class="form-control" type="text" id="direccion" name="direccion" required />
                 <div class="mb-3 row"></div>
             </div>
 
             <label class="col-sm-2 col-form-label" for="telefono">Teléfono</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" id="telefono" name="telefono" required/>
+                <input class="form-control" type="text" id="telefono" name="telefono" required />
                 <div class="mb-3 row"></div>
             </div>
 
             <label class="col-sm-2 col-form-label" for="contacto">P. Contacto</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" id="contacto" name="contacto" required/>
+                <input class="form-control" type="text" id="contacto" name="contacto" required />
                 <div class="mb-3 row"></div>
             </div>
 
@@ -117,6 +110,7 @@
     const redirectToList = './listado_ots';
     const endpoints = {
         searchAssignedWorkers: './controller/trabajador/buscar_trabajadores_listado.php',
+        saveAssignedWorkers: './controller/trabajadores_asignados/alta_trabajador_asignado.php',
         searchStatus: './controller/estado/buscar_estados_listado.php',
         searchClients: './controller/cliente/buscar_clientes_listado.php',
         search: (id) => './controller/ots/buscar_ots.php?id=' + id,
@@ -152,8 +146,12 @@
             const workersAssigned = await workerAssinedResponse?.value.json() ?? []; //TODO CURSOS ACTIVOS
             const status = await statusResponse?.value.json() ?? [];
             const clients = await clientsResponse?.value.json() ?? [];
+            // workersSelecteds = workersAssigned?.reduce((acc, item) => ({...acc, [item?.id]: false}), {});
 
-            fillSelectors(workersAssigned, status?.map(item => ({...item, nombre: item?.estado})), clients);
+            fillSelectors(workersAssigned, status?.map(item => ({
+                ...item,
+                nombre: item?.estado
+            })), clients);
 
             if (otId) { //CARGAR USUARIO POR LA ASINCRONIA
                 searchItem(otId);
@@ -162,7 +160,7 @@
             setTimeout(() => {
                 $("#errroModal").modal('show')
             }, 500);
-            fillSelectors([],[],[]);
+            fillSelectors([], [], []);
         }
     }
 
@@ -190,7 +188,7 @@
         }
     }
 
-    function patchForm(course) {
+    function patchForm(ots) {
         [...inputs ?? [], ...textarea ?? [], ...select ?? []]?.forEach(field => {
             const {
                 id,
@@ -198,7 +196,7 @@
             } = field ?? {};
             if (!id) return;
 
-            field.value = course?.[id] ?? '';
+            field.value = ots?.[id] ?? '';
         });
     }
 
@@ -210,20 +208,20 @@
         [...inputs ?? [], ...textarea ?? [], ...select ?? []].forEach(field => {
             const {
                 id,
-                value
+                value,
             } = field ?? {};
             if (!id) return;
-            console.log(id, value)
+            if (id === 'trabajadores_asignados') return;
             formData.append(id, value);
         });
 
         if (otId) formData.append('id', otId);
 
         const endpoint = otId ? endpoints.update : endpoints.save;
-        // callService(formData, endpoint, saveBtn, true, true);
+        callService(formData, endpoint, saveBtn, true,);
     }
 
-    async function callService(formData, url, button, redirect = true) {
+    async function callService(formData, url, button, redirect = true, isSaveOrUpdate = true) {
         try {
             updateSubmitButton(true, button);
             const response = await fetch(url, {
@@ -231,11 +229,27 @@
                 body: formData,
             });
 
+
+            if(isSaveOrUpdate){
+                const idOts = await response?.json() ?? null;
+
+                for (let option of document.querySelector('#trabajadores_asignados')?.options ?? []) {
+                    const {
+                        value,
+                        selected
+                    } = option ?? {};
+                    if (selected) {
+                        await saveWorkersAssigned(endpoints?.saveAssignedWorkers, value, idOts ?? otId);
+                    }
+                }
+            }
+
             updateSubmitButton(false, button);
             if (redirect) window.location.href = redirectToList;
         } catch (error) {
             $("#errroModal").modal('show');
             updateSubmitButton(false, button);
+            console.log(error)
         }
     }
 
@@ -247,7 +261,17 @@
     function deleteAction() {
         const formData = new FormData();
         formData.append('id', otId);
-        callService(formData, endpoints.delete, deleteBtn, true);
+        callService(formData, endpoints.delete, deleteBtn, true, false);
+    }
+
+    async function saveWorkersAssigned(url, id_trabajador, id_ots) {
+        const formData = new FormData();
+        formData.append('id_trabajador', id_trabajador);
+        formData.append('id_ots', id_ots);
+        return await fetch(url, {
+            method: 'post',
+            body: formData
+        });
     }
 
     function fillSelectors(workedAssigned, status, clients) {

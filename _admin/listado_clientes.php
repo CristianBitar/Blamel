@@ -27,7 +27,7 @@ if (!isset($_SESSION['tout'])) {
 
 <!-- GET  -->
 <?php
-// include('./controller/curso/buscar_cursos.php');
+include('./controller/cliente/buscar_clientes.php');
 ?>
 
 
@@ -77,7 +77,7 @@ if (!isset($_SESSION['tout'])) {
                                     </div>
                                     <div class="col-auto ms-auto">
                                         <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                                            <a href="./alta_curso" class="btn btn-falcon-success btn-sm" type="button"><span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span> <span class="ms-1">Nuevo Cliente</span></a>
+                                            <a href="./alta_cliente" class="btn btn-falcon-success btn-sm" type="button"><span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span> <span class="ms-1">Nuevo Cliente</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -90,14 +90,33 @@ if (!isset($_SESSION['tout'])) {
                                         <thead class="bg-200 text-900">
                                             <tr>
                                                 <th class="sort" data-sort="nombre">Nombre</th>
-                                                <th class="sort" data-sort="idioma">Idioma</th>
-                                                <th class="sort" data-sort="nivel">Nivel</th>
-                                                <th class="sort" data-sort="fecha_inicio">Fecha de inicio</th>
-                                                <th class="sort" data-sort="fecha_fin">Fecha de finalizacion</th>
+                                                <th class="sort" data-sort="direccion">Dirección</th>
+                                                <th class="sort" data-sort="ciudad">Ciudad</th>
+                                                <th class="sort" data-sort="telefono_principal">Teléfono</th>
+                                                <th class="sort" data-sort="telefono">Email</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        
+                                        <tbody id="tBody">
+                                            <?php
+                                                for ($recorrer = 0; $recorrer < count($listado_clientes); $recorrer++) {
+                                                ?>
+                                                    <tr>
+                                                    <td class="nombre"><?php echo $listado_clientes[$recorrer]['nombre']; ?></td>
+                                                    <td class="direccion"><?php echo $listado_clientes[$recorrer]['direccion']; ?></td>
+                                                    <td class="ciudad"><?php echo $listado_clientes[$recorrer]['ciudad']; ?></td>
+                                                    <td class="telefono_principal"><?php echo $listado_clientes[$recorrer]['telefono_principal']; ?></td>
+                                                    <td class="email"><?php echo $listado_clientes[$recorrer]['email']; ?></td>
+                                                    <td class="text-end">
+                                                        <div>
+                                                        <a href="./editar_cliente?id=<?php echo $listado_clientes[$recorrer]['id']; ?>" target='_self' class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver"><span class="text-500 fas fa-edit"></span></a>
+                                                        </div>
+                                                    </td>
+                                                    </tr>
+                                                <?php
+                                                }
+                                            ?>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
