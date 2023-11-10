@@ -83,6 +83,7 @@
         usuario, 
         clave, 
         foto,
+        tipo,
         fecha_alta) VALUES 
                     (NULL,
                     '$nombre',
@@ -97,6 +98,7 @@
                     '$usuario',
                     '$clave',
                     '$dest_path',
+                    1,
                     NOW());";
 
         /* Prepare statement */

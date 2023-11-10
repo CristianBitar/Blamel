@@ -1,0 +1,65 @@
+/* COLORES */
+/*-------------------
+	   SIDENAV
+--------------------*/
+.sidenav {
+  height: 100%;
+  width: 320px;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: -350px;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 40px;
+  box-shadow: 0 0 50px -10px rgba(0, 0, 0, 0.3); }
+  .sidenav .content {
+    padding: 0 20px; }
+    .sidenav .content h2 {
+      margin: 15px 10px 0;
+      font-weight: 500; }
+    .sidenav .content a {
+      padding: 10px 10px;
+      text-decoration: none;
+      color: #818181;
+      display: block;
+      border: 1px solid transparent;
+      transition: 0.3s; }
+      .sidenav .content a:hover {
+        border-color: #f4f4f4;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+        transition: border-color .167s linear,box-shadow .167s linear; }
+      .sidenav .content a.imagen {
+        border: 0; }
+        .sidenav .content a.imagen img {
+          width: 190px; }
+        .sidenav .content a.imagen:hover {
+          box-shadow: none;
+          transition: none;
+          border: 0; }
+    .sidenav .content span {
+      padding: 10px 20px 10px 40px;
+      position: relative; }
+      .sidenav .content span:before {
+        content: '\e93f';
+        font-family: 'sdelsol_icon';
+        padding-right: 10px;
+        font-size: 20px;
+        color: #78909c;
+        position: absolute;
+        top: 3px;
+        left: 10px; }
+    .sidenav .content .no_autorizados {
+      margin-left: 20px; }
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 24px;
+    margin-left: 50px;
+    color: #848484;
+    padding: 10px 15px;
+    cursor: pointer; }
+
+/*# sourceMappingURL=menu_sidebar.css.map */

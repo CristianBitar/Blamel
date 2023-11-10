@@ -65,7 +65,7 @@
                 <div class="mb-3 row"></div>
             </div>
 
-            <label class="col-sm-2 col-form-label" for="email">Emaill</label>
+            <label class="col-sm-2 col-form-label" for="email">Email</label>
             <div class="col-sm-4">
                 <input class="form-control" type="text" id="email" name="email" required />
                 <div class="mb-3 row"></div>

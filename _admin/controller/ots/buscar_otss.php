@@ -39,7 +39,7 @@
             while ($row = $result->fetch_assoc())   {	
                 $id = $row['id'];
                 $nombre = $row['nombre'];
-                $fecha_hora = $row['fecha_hora'];
+                $fecha_inicio = $row['fecha_inicio'];
                 $cliente = $row['cliente'];
                 $direccion = $row['direccion'];
                 $telefono = $row['telefono'];
@@ -50,7 +50,7 @@
                 array_push($listado_ots, array(
                     'id'=>$id, 
                     'nombre'=>$nombre, 
-                    'fecha_hora'=>$fecha_hora,
+                    'fecha_inicio'=>$fecha_inicio,
                     'cliente'=>$cliente,
                     'direccion'=>$direccion,
                     'telefono'=>$telefono,

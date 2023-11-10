@@ -94,7 +94,7 @@ include('./controller/ots/buscar_otss.php');
                                         <thead class="bg-200 text-900">
                                             <tr>
                                                 <th class="sort" data-sort="nombre">Nombre</th>
-                                                <th class="sort" data-sort="fecha_hora">Fecha y hora</th>
+                                                <th class="sort" data-sort="fecha_inicio">Fecha y hora</th>
                                                 <th class="sort" data-sort="cliente">cliente</th>
                                                 <th class="sort" data-sort="direccion">Dirección</th>
                                                 <th class="sort" data-sort="telefono">Teléfono</th>
@@ -107,7 +107,7 @@ include('./controller/ots/buscar_otss.php');
                                             ?>
                                                 <tr>
                                                     <td class="nombre"><?php echo $listado_ots[$recorrer]['nombre']; ?></td>
-                                                    <td class="fecha_hora"><?php echo $listado_ots[$recorrer]['fecha_hora']; ?></td>
+                                                    <td class="fecha_inicio"><?php echo $listado_ots[$recorrer]['fecha_inicio']; ?></td>
                                                     <td class="cliente"><?php echo $listado_ots[$recorrer]['cliente']; ?></td>
                                                     <td class="direccion"><?php echo $listado_ots[$recorrer]['direccion']; ?></td>
                                                     <td class="telefono"><?php echo $listado_ots[$recorrer]['telefono']; ?></td>

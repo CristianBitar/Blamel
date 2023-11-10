@@ -15,7 +15,7 @@ require_once("../nucleo/conexion.php");
 
         if (($nombre != "") && ($clave != "")) {
             http: //localhost/PLANTILLA_FALCON/
-            $query = "SELECT * FROM usuarios WHERE nombre = '$nombre' AND clave = '$clave' AND isDeleted='0' AND tipo=0";
+            $query = "SELECT * FROM trabajadores WHERE nombre = '$nombre' AND clave = '$clave' AND isDeleted='0' AND tipo=0";
 
             //echo $query;
             $result = $mysqli->query($query);
@@ -42,7 +42,7 @@ require_once("../nucleo/conexion.php");
                 $_SESSION['id'] = $id;
                 $_SESSION['tipo'] = $tipo;
                 //   $_SESSION['foto'] = $foto;
-                $_SESSION['logo'] = './img/background.png'; //'./img/avatar2.png'
+                $_SESSION['logo'] = './img/logo_menu.png'; //'./img/avatar2.png'
                 $result->free();
 
                 //LOGS ACCESO

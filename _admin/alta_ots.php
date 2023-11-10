@@ -44,6 +44,10 @@
 	<!--    Stylesheets-->
 	<!-- ===============================================-->
 	<?php include("includes/Stylesheets.php"); ?>
+
+	<!-- <link href="./vendors/fullcalendar/main.min.css" rel="stylesheet"> -->
+	<link href="./vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
+	<!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script> -->
 </head>
 
 <body>
@@ -102,6 +106,13 @@
 	<?php include("includes/javascripts.php"); ?>
 	<!-- <script src="./functions/common_functions.js"> </script> -->
 	<script src="./vendors/jquery/jquery.min.js"> </script>
+
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+	<!-- <script src="./vendors/fullcalendar/main.min.js"></script> -->
+	<script src="./assets/js/flatpickr.js"></script> 
+	<!-- <script src="./assets/js/theme.js"></script> -->
+
+	<script src="./vendors/fontawesome/all.min.js"></script>
     <script src="./vendors/datatables.net/jquery.dataTables.min.js"></script>
     <script src="./vendors/datatables.net-bs5/dataTables.bootstrap5.min.js"> </script>
     <script src="./vendors/datatables.net-fixedcolumns/dataTables.fixedColumns.min.js"> </script>
