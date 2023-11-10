@@ -15,7 +15,7 @@ require_once("../nucleo/conexion.php");
 
         if (($nombre != "") && ($clave != "")) {
   
-            $query = "SELECT * FROM trabajadores WHERE nombre = '$nombre' AND clave = '$clave' AND isDeleted='0' AND tipo=1";
+            $query = "SELECT * FROM trabajadores WHERE usuario = '$nombre' AND clave = '$clave' AND isDeleted='0' AND tipo=1";
 
             //echo $query;
             $result = $mysqli->query($query);

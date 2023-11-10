@@ -25,10 +25,6 @@ if (!isset($_SESSION['tout'])) {
 }
 ?>
 
-<!-- GET  -->
-<?php
-include('./controller/ots/buscar_otss.php');
-?>
 
 
 <!DOCTYPE html>
@@ -73,39 +69,23 @@ include('./controller/ots/buscar_otss.php');
                             <div class="card-header">
                                 <div class="row flex-between-end">
                                     <div class="col-auto align-self-center">
-                                        <h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>OTS asignadas</small></h5>
+                                        <h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>OT´S asignadas</small></h5>
                                     </div>
-                                    
+
                                 </div>
                             </div>
 
 
                             <div class="card-body bg-light">
                                 <div class="x_content">
-                                    <table class="table mb-0 data-table fs--1">
-                                        <thead class="bg-200 text-900">
+                                    <table class="table">
+                                        <thead class="bg-200">
                                             <tr>
-                                                <th class="sort" data-sort="nombre">Nombre</th>
-                                                <th class="sort" data-sort="fecha_inicio">Fecha Inicio</th>
-                                                <th class="sort"></th>
+                                                <th scope="col">OT</th>
+                                                <th scope="col">Fecha Inicio</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tBody">
-                                            <?php
-                                            for ($recorrer = 0; $recorrer < count($listado_ots); $recorrer++) {
-                                            ?>
-                                                <tr>
-                                                    <td class="nombre"><?php echo $listado_ots[$recorrer]['nombre']; ?></td>
-                                                    <td class="fecha_inicio"><?php echo $listado_ots[$recorrer]['fecha_inicio']; ?></td>
-                                                    <td class="text-end">
-                                                        <div>
-                                                            <a href="./editar_ots?id=<?php echo $listado_ots[$recorrer]['id']; ?>" target='_self' class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver"><span class="text-500 fas fa-edit"></span></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
+                                        <tbody id="dueTable">
                                         </tbody>
                                     </table>
                                 </div>
@@ -135,3 +115,55 @@ include('./controller/ots/buscar_otss.php');
 
 
 </html>
+
+<script type="text/javascript">
+    const redirectToList = './detalle_ot';
+    const endpoints = {
+        search: './controller/ots/buscar_otss.php',
+    };
+
+
+    // ********************** CONSTRUCTOR **********************
+    (function onInit() {
+        loadOts();
+    })();
+
+
+    async function loadOts() {
+        try {
+            const [otsResponse] = await Promise.allSettled([fetch(endpoints.search)]);
+            const ots = await otsResponse?.value.json() ?? []; 
+            fillTable(ots);
+        } catch (error) {
+            setTimeout(() => {
+                $("#errroModal").modal('show')
+            }, 500);
+        }
+    }
+
+    function fillTable(ots) {
+        dueTable.innerHTML = '';
+
+        if(!ots?.length){
+            dueTable.innerHTML = `
+                <tr><td colspan="2" class="text-center">No hay datos</td></tr>
+            `;
+            return;
+        }
+        
+        (ots ?? [])?.forEach(item => {
+            const { id, fecha_inicio } = item ?? {};
+            dueTable.innerHTML += `
+                <tr onclick="gotToOt(${id})">
+                    <td>${id ?? '-'}</td>
+                    <td>${fecha_inicio ?? '-'}</td>
+                </tr>
+            `;
+        });
+    }
+
+    function gotToOt(id) {
+        window.location.href = redirectToList + '?id=' + id;
+    }
+</script>
+

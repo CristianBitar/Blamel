@@ -89,7 +89,7 @@ if (isset($_GET['id'])) {
 
 
 <!-- START HTML  -->
-<form id="alta_ticket" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data" onsubmit="submitStudent(event)">
+<form id="alta_ticket" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data" onsubmit="submitWorker(event)">
     <div class="card-body bg-light">
         <div class="mb-3 row">
 
@@ -165,7 +165,7 @@ if (isset($_GET['id'])) {
 
             <div class="card" style="margin-top: 10px">
                 <div class="card-header">
-                    <h5 class="mb-0">Acceso App OTS</h5>
+                    <h5 class="mb-0">Acceso App</h5>
                 </div>
                 <div class="card-body row">
                     <label class="col-sm-2 col-form-label" for="usuario">Login</label>
@@ -293,8 +293,8 @@ if (isset($_GET['id'])) {
         });
     }
 
-    async function submitStudent(event) {
-        event.preventDefault();
+    async function submitWorker(event) {
+        event?.preventDefault();
         const formData = new FormData();
 
         [...inputs ?? []].forEach(field => {

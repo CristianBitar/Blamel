@@ -30,23 +30,27 @@
 
     // ************** GET **************
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        
-        $listado_ots = array(); 
-        $query = "SELECT * FROM ots WHERE isDeleted = 0 ORDER BY id ASC";
+        $id=$mysqli -> real_escape_string($_GET['id']);
+
+        $listado_clientes = array(); 
+        $query = "SELECT gastos_ot.id, gastos_ot.gasto, gastos_ot.id_ot , gastos_ot.importe
+                FROM gastos_ot 
+                INNER JOIN ots 
+                ON gastos_ot.id_ot = ots.id
+                WHERE ots.id = '$id' AND gastos_ot.isDeleted = 0 
+                ORDER BY gastos_ot.id ASC";
 
         if ($result = $mysqli->query($query)) {
 
             while ($row = $result->fetch_assoc())   {	
                 $id = $row['id'];
-                $nombre = $row['nombre'];
-                $fecha_inicio = $row['fecha_inicio'];
-                $fecha_fin = $row['fecha_fin'];
+                $gasto = $row['gasto'];
+                $importe = $row['importe'];
                 
-                array_push($listado_ots, array(
+                array_push($listado_clientes, array(
                     'id'=>$id, 
-                    'nombre'=>$nombre, 
-                    'fecha_inicio'=>$fecha_inicio, 
-                    'fecha_fin'=>$fecha_fin, 
+                    'gasto'=>$gasto,
+                    'importe'=>$importe, 
                 ));
             }
             /* free result set */
@@ -54,7 +58,7 @@
         }
 
         // Devolvemos el array pasado a JSON como objeto
-        echo json_encode($listado_ots);
+        echo json_encode($listado_clientes);
     }
 
 ?>

@@ -1,36 +1,38 @@
 <?php
-    // require_once ("../../../nucleo/constantes.php");   
-    // // Conecta a la base de datos 
-    // require_once ("../../../nucleo/conexion.php");
-    // // require_once ("../../nucleo/funciones.php"); 
+    require_once ("../../../nucleo/constantes.php");   
+    // Conecta a la base de datos 
+    require_once ("../../../nucleo/conexion.php");
+    // require_once ("../../nucleo/funciones.php"); 
 
-    // //Se toman los valores de la sesion
-    // @session_start();
+    //Se toman los valores de la sesion
+    @session_start();
 
-    // if (!isset($_SESSION['id'])){
-    //     header("Location: login");
-    //     exit(0);
-    // }
+    if (!isset($_SESSION['id'])){
+        header("Location: login");
+        exit(0);
+    }
 
-    // if(!isset($_SESSION['tout'])) {
-    //     $_SESSION['tout'] = time();
-    // }
-    // else  {
+    if(!isset($_SESSION['tout'])) {
+        $_SESSION['tout'] = time();
+    }
+    else  {
 
-    //     if(($_SESSION['tout']+3600) < time()) {
+        if(($_SESSION['tout']+3600) < time()) {
 
-    //         @session_destroy();
-    //         header("Location: login");
-    //         exit(0);
-    //     }
+            @session_destroy();
+            header("Location: login");
+            exit(0);
+        }
 
-    //     $_SESSION['tout'] = time();
-    // }
+        $_SESSION['tout'] = time();
+    }
 
 
     // ************** GET **************
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $sesion_id = $_SESSION['id'];
+
+        $fecha = isset($_GET['nombre']) ? $_GET['fecha'] : null;
 
         $listado_ots = array(); 
         $query = "SELECT ots.id, ots.nombre, ots.fecha_inicio
@@ -41,6 +43,11 @@
                     ON trabajadores.id = trabajadores_asignados.id_trabajador
                     WHERE trabajadores.id = '$sesion_id' AND ots.isDeleted = 0 
                     ORDER BY ots.id ASC";
+
+
+        // if ($fecha !== null) {
+        //     $sql .= " AND fecha_inicio = '$fecha'";
+        // }
 
         if ($result = $mysqli->query($query)) {
 
@@ -60,7 +67,7 @@
         }
 
         // Devolvemos el array pasado a JSON como objeto
-        // echo json_encode($listado_ots);
+        echo json_encode($listado_ots);
     }
 
 ?>

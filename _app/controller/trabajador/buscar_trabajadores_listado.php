@@ -39,10 +39,13 @@
             while ($row = $result->fetch_assoc())   {	
                 $id = $row['id'];
                 $nombre = $row['nombre'];
+                $nombre = $row['nombre'];
+                $primer_apellido = $row['primer_apellido'];
                 
                 array_push($listado_trabajadores, array(
                     'id'=>$id, 
                     'nombre'=>$nombre, 
+                    'primer_apellido'=>$primer_apellido, 
                 ));
             }
             /* free result set */
