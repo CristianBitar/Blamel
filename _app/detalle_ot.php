@@ -59,10 +59,6 @@ if (!isset($_SESSION['tout'])) {
 
     <main class="main" id="top">
         <div class="container" data-layout="container">
-            <!-- MENU  -->
-            <?php include("includes/botonera.php"); ?>
-            <?php include("includes/menu.php"); ?>
-            </nav>
 
             <!-- CONTENT  -->
             <div class="content">
@@ -71,31 +67,26 @@ if (!isset($_SESSION['tout'])) {
                     <div class="card-body overflow-hidden p-lg-6">
                         <div class="row align-items-center">
 
-                            <div class="card-header">
-                                <div class="row flex-between-end">
-                                    <div class="col-auto align-self-center">
-                                        <h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>Modificar ficha OT </small></h5>
-                                    </div>
-                                    <div class="col-auto ms-auto">
-
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- FORMULARIO CURSO  -->
                             <form id="form" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                                 <div class="card-body bg-light">
                                     <div class="mb-3 row">
 
-                                        <label class="col-sm-2 col-form-label" for="id">Nº OT</label>
-                                        <div class="col-sm-4">
+                                        <label class="col-4 col-sm-2 col-form-label" for="id">Nº OT</label>
+                                        <div class="col-8 col-sm-4">
                                             <input class="form-control" type="text" id="id" name="id" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="fecha_hora">Fecha y Hora</label>
+                                        <label class="col-sm-2 col-form-label text-truncate" for="fecha_inicio">Fecha inicial</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="fecha_hora" name="fecha_hora" disabled />
+                                            <input class="form-control" type="text" id="fecha_inicio" name="fecha_inicio" disabled />
+                                            <div class="mb-3 row"></div>
+                                        </div>
+
+                                        <label class="col-sm-2 col-form-label text-truncate" for="fecha_fin">Fecha Fin</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="text" id="fecha_fin" name="fecha_fin" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
 
@@ -106,8 +97,8 @@ if (!isset($_SESSION['tout'])) {
                                             <div class="mb-3 row"></div>
                                         </div>
 
-                                        <label class="col-sm-3 col-form-label" for="trabajadores_asignados">Trabajadores asignados</label>
-                                        <div class="col-sm-9">
+                                        <label class="col-sm-12 col-form-label" for="trabajadores_asignados">Trabajadores asignados</label>
+                                        <div class="col-sm-12">
                                             <textarea class="form-control" id="trabajadores_asignados" name="trabajadores_asignados" value="" rows="4" disabled></textarea>
                                             <div class="mb-3 row"></div>
                                         </div>
@@ -119,19 +110,19 @@ if (!isset($_SESSION['tout'])) {
                                             <div class="mb-3 row"></div>
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="direccion">Dirección</label>
-                                        <div class="col-sm-10">
+                                        <label class="col-sm-2 col-form-label text-truncate" for="direccion">Dirección</label>
+                                        <div class="col-sm-4">
                                             <input class="form-control" type="text" id="direccion" name="direccion" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="contacto">P. Contacto</label>
+                                        <label class="col-sm-2 col-form-label text-truncate" for="contacto">Persona de contacto</label>
                                         <div class="col-sm-4">
                                             <input class="form-control" type="text" id="contacto" name="contacto" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
                                         
-                                        <label class="col-sm-2 col-form-label" for="telefono">Teléfono</label>
+                                        <label class="col-sm-2 col-form-label text-truncate" for="telefono">Teléfono</label>
                                         <div class="col-sm-4">
                                             <input class="form-control" type="text" id="telefono" name="telefono" disabled />
                                             <div class="mb-3 row"></div>
@@ -273,14 +264,10 @@ if (!isset($_SESSION['tout'])) {
             } = field ?? {};
             if (!id) return;
 
-            if (id === 'fecha_hora') {
-                field.value = ots?.['fecha_inicio'] + ' / ' + ots?.['fecha_fin'];
-                return
-
-            }
             if(id === 'trabajadores_asignados'){
-                field.value = workersAssigned?.map(worker => worker?.nombre + ' ' +worker?.primer_apellido ?? '')?.join('\n');
-                return 
+                const workers = (workersAssigned ?? [])?.map(worker => worker?.nombre + ' ' +worker?.primer_apellido ?? '');
+                field.value = workers?.join('\n');
+                return ;
             }
 
             field.value = ots?.[id] ?? '';

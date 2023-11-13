@@ -60,10 +60,6 @@ if (!isset($_SESSION['tout'])) {
 
     <main class="main" id="top">
         <div class="container" data-layout="container">
-            <!-- MENU  -->
-            <?php include("includes/botonera.php"); ?>
-            <?php include("includes/menu.php"); ?>
-            </nav>
 
             <!-- CONTENT  -->
             <div class="content">
@@ -72,31 +68,26 @@ if (!isset($_SESSION['tout'])) {
                     <div class="card-body overflow-hidden p-lg-6">
                         <div class="row align-items-center">
 
-                            <div class="card-header">
-                                <div class="row flex-between-end">
-                                    <div class="col-auto align-self-center">
-                                        <h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>Modificar ficha OT </small></h5>
-                                    </div>
-                                    <div class="col-auto ms-auto">
-
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- FORMULARIO CURSO  -->
                             <form id="form" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                                 <div class="card-body bg-light">
                                     <div class="mb-3 row">
 
-                                        <label class="col-sm-2 col-form-label" for="id">Nº OT</label>
-                                        <div class="col-sm-4">
+                                        <label class="col-4 col-sm-2 col-form-label" for="id">Nº OT</label>
+                                        <div class="col-8 col-sm-4">
                                             <input class="form-control" type="text" id="id" name="id" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="fecha_hora">Fecha y Hora</label>
+                                        <label class="col-sm-2 col-form-label" for="fecha_inicio">Fecha inicial</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="fecha_hora" name="fecha_hora" disabled />
+                                            <input class="form-control" type="text" id="fecha_inicio" name="fecha_inicio" disabled />
+                                            <div class="mb-3 row"></div>
+                                        </div>
+
+                                        <label class="col-sm-2 col-form-label text-truncate" for="fecha_fin">Fecha fin</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="text" id="fecha_fin" name="fecha_fin" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
 
@@ -107,22 +98,25 @@ if (!isset($_SESSION['tout'])) {
                                             <div class="mb-3 row"></div>
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="fecha_hora">Salida Taller</label>
-                                        <div class="col-sm-4">
-                                            <input class="form-control btn btn-falcon-success " type="button" value="Registrar" onclick="registerCheckOut()" />
-                                            <div class="mb-3 row"></div>
+                                        <label class="col-6 col-sm-2 col-form-label" for="salida_taller">Salida Taller</label>
+                                        <div class="col-6 col-sm-4 salida_taller">
+                                            <!-- <input class="form-control btn btn-falcon-success workShopExitBtn" type="button" value="Registrar" onclick="registerCheckOut()" /> -->
+                                            <!-- <input class="form-control" type="text" id="salida_taller" name="salida_taller" disabled /> -->
+                                            <!-- <div class="mb-3 row"></div> -->
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="fecha_hora">Inicio Trabajo</label>
-                                        <div class="col-sm-4">
-                                            <input class="form-control btn btn-falcon-success " type="button" value="Registrar" onclick="registerWorkInit()" />
-                                            <div class="mb-3 row"></div>
+                                        <label class="col-6 col-sm-2 col-form-label" for="inicio_trabajo">Inicio Trabajo</label>
+                                        <div class="col-6 col-sm-4 inicio_trabajo">
+                                            <!-- <input class="form-control btn btn-falcon-success initWorkBtn" type="button" value="Registrar" onclick="registerWorkInit()" /> -->
+                                            <!-- <input class="form-control" type="text" id="inicio_trabajo" name="inicio_trabajo" disabled /> -->
+                                            <!-- <div class="mb-3 row"></div> -->
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="fecha_hora">Parada</label>
-                                        <div class="col-sm-4">
-                                            <input class="form-control btn btn-falcon-success " type="button" value="Registrar" onclick="registerStall()" />
-                                            <div class="mb-3 row"></div>
+                                        <label class="col-6 col-sm-2 col-form-label" for="parada">Parada</label>
+                                        <div class="col-6 col-sm-4 parada">
+                                            <!-- <input class="form-control btn btn-falcon-success stopBtn" type="button" value="Registrar" onclick="registerStall()" /> -->
+                                            <!-- <input class="form-control" type="text" id="parada" name="parada" disabled /> -->
+                                            <!-- <div class="mb-3 row"></div> -->
                                         </div>
 
                                         <label class="col-sm-12 col-form-label" for="motivo">Motivo</label>
@@ -131,20 +125,22 @@ if (!isset($_SESSION['tout'])) {
                                             <div class="mb-3 row"></div>
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="fecha_hora">Continuar</label>
-                                        <div class="col-sm-4">
-                                            <input class="form-control btn btn-falcon-success " type="button" value="Registrar" onclick="registerContinue()" />
-                                            <div class="mb-3 row"></div>
+                                        <label class="col-6 col-sm-2 col-form-label" for="continuar">Continuar</label>
+                                        <div class="col-6 col-sm-4 continuar">
+                                            <!-- <input class="form-control btn btn-falcon-success continueBtn" type="button" value="Registrar" onclick="registerContinue()" /> -->
+                                            <!-- <input class="form-control" type="text" id="continuar" name="continuar" disabled /> -->
+                                            <!-- <div class="mb-3 row"></div> -->
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="fecha_hora">Finalizar trabajo</label>
-                                        <div class="col-sm-4">
-                                            <input class="form-control btn btn-falcon-success " type="button" value="Registrar" onclick="registerFinisWork()" />
-                                            <div class="mb-3 row"></div>
+                                        <label class="col-6 col-sm-2 col-form-label" for="finalizar_trabajo">Finalizar trabajo</label>
+                                        <div class="col-6 col-sm-4 finalizar_trabajo">
+                                            <!-- <input class="form-control btn btn-falcon-success finishWorkBtn" type="button" value="Registrar" onclick="registerFinisWork()" /> -->
+                                            <!-- <input class="form-control" type="text" id="finalizar_trabajo" name="finalizar_trabajo" disabled /> -->
+                                            <!-- <div class="mb-3 row"></div> -->
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label" for="fecha_hora">Cuotas OT</label>
-                                        <div class="col-sm-4">
+                                        <label class="col-6 col-sm-2 col-form-label" for="fecha_hora">Gastos OT</label>
+                                        <div class="col-6 col-sm-4">
                                             <input class="form-control btn btn-primary addDueBtn" type="button" value="Añadir" onclick="openModalDues()" />
                                             <div class="mb-3 row"></div>
                                         </div>
@@ -162,8 +158,8 @@ if (!isset($_SESSION['tout'])) {
                                             </table>
                                         </div>
 
-                                        <label class="col-sm-2 col-form-label">Total</label>
-                                        <div class="col-sm-4">
+                                        <label class="col-sm-6 col-form-label">Total</label>
+                                        <div class="col-sm-6">
                                             <input class="form-control total" type="text" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
@@ -208,7 +204,7 @@ if (!isset($_SESSION['tout'])) {
 <script type="text/javascript">
     const [_, otId] = window.location.href?.split('id=') ?? [];
     const saveBtn = document.querySelector('.saveBtn');
-    const addDueBtn = document.querySelector('.addDueBtn');
+    const addDueBtn = document.querySelector('.addDueBtn');;
     const total = document.querySelector('.total');
     const dueTable = document.querySelector('#dueTable');
     const form = document.querySelector('#form'); //FORM IMPUTS
@@ -224,6 +220,11 @@ if (!isset($_SESSION['tout'])) {
         searchDues: (id) => './controller/gasto_ot/buscar_gastos_por_ot.php?id=' + id,
         saveDue: './controller/gasto_ot/alta_gasto_ot.php',
         search: (id) => './controller/ots/buscar_ots.php?id=' + id,
+        updateWorkShoExit: './controller/ots/salir_taller_ot.php',
+        updateInitWork: './controller/ots/inicio_trabajo_ot.php',
+        updateStop: './controller/ots/parada_ot.php',
+        updateContinue: './controller/ots/continuar_ot.php',
+        updateFinishWork: './controller/ots/finalizar_trabajo_ot.php',
     };
 
 
@@ -235,7 +236,7 @@ if (!isset($_SESSION['tout'])) {
         }
 
         loadSelectors();
-        loadDues();
+        loadBills();
     })();
 
     async function loadSelectors() {
@@ -254,11 +255,11 @@ if (!isset($_SESSION['tout'])) {
         }
     }
 
-    async function loadDues() {
+    async function loadBills() {
         try {
             const [duesResponse] = await Promise.allSettled([fetch(endpoints.searchDues(otId))]);
             const dues = await duesResponse?.value.json() ?? []; 
-            fillDueTable(dues);
+            fillBillsTable(dues);
         } catch (error) {
             setTimeout(() => {
                 $("#errroModal").modal('show')
@@ -298,18 +299,16 @@ if (!isset($_SESSION['tout'])) {
 
             if (!id || id === 'trabajadores_asignados') return;
 
-            if (id === 'fecha_hora') {
-                field.value = ots?.['fecha_inicio'] + ' / ' + ots?.['fecha_fin'];
-                return;
-            }
-
             field.value = ots?.[id] ?? '';
         });
+
+        loadRegisterActions(ots)
     }
 
-    async function callService(formData, url, button, isDue = false, redirect = true) {
+    async function callService(formData, url, button, isBill = false, redirect = true, reloadOt) {
         try {
             updateSubmitButton(true, button);
+
             const response = await fetch(url, {
                 method: 'post',
                 body: formData,
@@ -318,7 +317,8 @@ if (!isset($_SESSION['tout'])) {
             updateSubmitButton(false, button);
 
             if(redirect) window.location.href = redirectToList;
-            if(isDue) loadDues();
+            if(isBill) loadBills();
+            if(reloadOt) searchItem(otId)
         } catch (error) {
             $("#errroModal").modal('show');
             updateSubmitButton(false, button);
@@ -341,7 +341,7 @@ if (!isset($_SESSION['tout'])) {
         })?.join(',')?.replace(/,/g, '')
     }
 
-    function fillDueTable(dues) {
+    function fillBillsTable(dues) {
         let totalAmount = 0;
         dueTable.innerHTML = '';
 
@@ -376,23 +376,38 @@ if (!isset($_SESSION['tout'])) {
     }
 
     function registerCheckOut() {
-        // TODO  
+        const workShopExitBtn = document.querySelector('.workShopExitBtn');
+        const formData = new FormData();
+        formData.append('id', otId);
+        callService(formData, endpoints.updateWorkShoExit, workShopExitBtn, false, false, true);
     }
 
     function registerWorkInit() {
-        // TODO  
+        const initWorkBtn = document.querySelector('.initWorkBtn');
+        const formData = new FormData();
+        formData.append('id', otId);
+        callService(formData, endpoints.updateInitWork, initWorkBtn, false, false, true);
     }
 
     function registerStall() {
-        // TODO  
+        const stopBtn = document.querySelector('.stopBtn');
+        const formData = new FormData();
+        formData.append('id', otId);
+        callService(formData, endpoints.updateStop, stopBtn, false, false, true);
     }
 
     function registerContinue() {
-        // TODO  
+        const continueBtn = document.querySelector('.continueBtn');
+        const formData = new FormData();
+        formData.append('id', otId);
+        callService(formData, endpoints.updateContinue, continueBtn, false, false, true);
     }
 
     function registerFinisWork() {
-        // TODO  
+        const finishWorkBtn = document.querySelector('.finishWorkBtn');
+        const formData = new FormData();
+        formData.append('id', otId);
+        callService(formData, endpoints.updateFinishWork, finishWorkBtn, false, false, true); 
     }
 
     function openModalDues() {
@@ -401,6 +416,55 @@ if (!isset($_SESSION['tout'])) {
 
     function dimissModal() {
         $("#modalAgregarCuotas").modal('hide');
+    }
+
+    function loadRegisterActions(ot) {
+        const actions = {
+            salida_taller: 'registerCheckOut',
+            inicio_trabajo: 'registerWorkInit',
+            parada: 'registerStall',
+            continuar: 'registerContinue',
+            finalizar_trabajo: 'registerFinisWork'
+        };
+
+        const buttons = {
+            salida_taller: 'workShopExitBtn',
+            inicio_trabajo: 'initWorkBtn',
+            parada: 'stopBtn',
+            continuar: 'continueBtn',
+            finalizar_trabajo: 'finishWorkBtn'
+        };
+
+        const fields = Object.keys(actions ?? {});
+
+        const selectedFields = Object.entries(ot ?? {})?.reduce((acc, field) => {
+            const [key, value] = field ?? [];
+            return {...acc,...(fields?.includes(key) ? {[key]: value} : {}) }
+        },{});
+
+        let lastIndexValue = true;
+        Object.entries(selectedFields ?? {})?.forEach((item) => {
+            const [key, value] = item ?? [];
+            const div = document.querySelector('.'+key);
+
+            if(value) {
+                div.classList?.remove('col-6');
+                div.classList?.add('col-12');
+                div.innerHTML = `
+                    <input class="form-control" type="text" id="${ key }" name="${ key }" disabled value="${value}" />
+                    <div class="mb-3 row"></div>
+                `;
+            }
+            else {
+                const ifDisable = !lastIndexValue ? 'disabled' : ''
+                div.classList?.add('col-6');
+                div.innerHTML = `
+                    <input class="form-control btn btn-falcon-success ${buttons?.[key]}" type="button" value="Registrar" onclick="${actions?.[key]}()" ${ifDisable}/> 
+                    <div class="mb-3 row"></div>
+                `;
+            }
+            lastIndexValue = value
+        });
     }
 
     function addDue(event) {

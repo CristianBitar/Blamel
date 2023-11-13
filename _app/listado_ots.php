@@ -54,11 +54,6 @@ if (!isset($_SESSION['tout'])) {
     <!-- ===============================================-->
     <main class="main" id="top">
         <div class="container" data-layout="container">
-            <!-- MENU  -->
-            <?php include("includes/botonera.php"); ?>
-            <?php include("includes/menu.php"); ?>
-            </nav>
-
             <!-- CONTENT  -->
             <div class="content">
                 <?php include("includes/menu2.php"); ?>
@@ -69,12 +64,24 @@ if (!isset($_SESSION['tout'])) {
                             <div class="card-header">
                                 <div class="row flex-between-end">
                                     <div class="col-auto align-self-center">
-                                        <h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>OT´S asignadas</small></h5>
+                                        <h5 class="mb-0"><small>OT´S asignadas</small></h5>
                                     </div>
 
                                 </div>
                             </div>
 
+                            <form id="form" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
+                                <div class="card-body bg-light">
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-2 col-form-label" for="fecha_inicio">Fecha</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="date" id="fecha_inicio" name="fecha_inicio" value="" onchange="selectDate(event)" />
+    
+                                            <div class="mb-3 row"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
 
                             <div class="card-body bg-light">
                                 <div class="x_content">
@@ -121,6 +128,7 @@ if (!isset($_SESSION['tout'])) {
     const endpoints = {
         search: './controller/ots/buscar_otss.php',
     };
+    let globalOts = [];
 
 
     // ********************** CONSTRUCTOR **********************
@@ -133,6 +141,7 @@ if (!isset($_SESSION['tout'])) {
         try {
             const [otsResponse] = await Promise.allSettled([fetch(endpoints.search)]);
             const ots = await otsResponse?.value.json() ?? []; 
+            globalOts = ots ?? [];
             fillTable(ots);
         } catch (error) {
             setTimeout(() => {
@@ -160,6 +169,16 @@ if (!isset($_SESSION['tout'])) {
                 </tr>
             `;
         });
+    }
+
+    function selectDate(value) {
+        const date = value?.target?.value ?? null;
+        const filterOts = [...globalOts ?? []]?.filter((item) => {
+            const { fecha_inicio } = item ?? {}
+            const [parseDate] = fecha_inicio?.split(' ') ?? [];
+            return date ? parseDate === date : true;
+        });
+        fillTable(filterOts);
     }
 
     function gotToOt(id) {

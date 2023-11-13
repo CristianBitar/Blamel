@@ -15,7 +15,7 @@
             <div class="modal-body">
                 <label class="col-sm-2 col-form-label" for="importe">Importe</label>
 				<div class="col-md-12 col-sm-12 col-xs-12">
-					<input id="importe" type="number" name="importe" class="form-control col-md-7 col-xs-12" required>
+					<input id="importe" type="number" name="importe" step="0.01" class="form-control col-md-7 col-xs-12" required>
 				</div>
 			</div>
 

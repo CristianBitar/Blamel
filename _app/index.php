@@ -1,6 +1,6 @@
 <?php
 
-header ("Location: login");
+header ("Location: listado_ots");
 
 
 ?>

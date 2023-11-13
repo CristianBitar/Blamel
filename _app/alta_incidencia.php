@@ -58,10 +58,6 @@ if (!isset($_SESSION['tout'])) {
 
     <main class="main" id="top">
         <div class="container" data-layout="container">
-            <!-- MENU  -->
-            <?php include("includes/botonera.php"); ?>
-            <?php include("includes/menu.php"); ?>
-            </nav>
 
             <!-- CONTENT  -->
             <div class="content">
@@ -70,30 +66,19 @@ if (!isset($_SESSION['tout'])) {
                     <div class="card-body overflow-hidden p-lg-6">
                         <div class="row align-items-center">
 
-                            <div class="card-header">
-                                <div class="row flex-between-end">
-                                    <div class="col-auto align-self-center">
-                                        <h5 class="mb-0"><?php echo nombreempresa . ' '; ?><small>Modificar ficha OT </small></h5>
-                                    </div>
-                                    <div class="col-auto ms-auto">
-
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- FORMULARIO CURSO  -->
                             <form id="alta_ticket" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data" onsubmit="submitForm(event)">
                                 <div class="card-body bg-light">
                                     <div class="mb-3 row">
 
-                                        <label class="col-sm-2 col-form-label" for="id">Nº OT</label>
-                                        <div class="col-sm-4">
+                                        <label class="col-4 col-sm-2 col-form-label" for="id">Nº OT</label>
+                                        <div class="col-8 col-sm-4">
                                             <input class="form-control" type="text" id="id" name="id" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
 
                                     
-                                        <label class="col-sm-12 col-form-label" for="incidencia">Notas / Incidencias</label>
+                                        <label class="col-sm-12 col-form-label" for="incidencia">Registrar Incidencia</label>
                                         <div class="col-sm-12" >
                                             <textarea class="form-control" id="incidencia" name="incidencia" value="" rows="10"></textarea>
                                             <div class="mb-3 row"></div>
