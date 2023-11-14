@@ -78,26 +78,3 @@
     }
   });
 </script>
-
-<!-- <a class="nav-link dropdown-indicator" href="#events" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="events">
-          <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-wrench"></span></span><span class="nav-link-text ps-1">Configuración</span>
-          </div>
-        </a>
-        <ul class="nav collapse" id="events">
-          <li class="nav-item"><a class="nav-link" href="listado_trabajadores" data-bs-toggle="" aria-expanded="false">
-              <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Trabajadores</span>
-              </div>
-            </a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="listado_clientes" data-bs-toggle="" aria-expanded="false">
-              <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Clientes</span>
-              </div>
-            </a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="listado_logs" data-bs-toggle="" aria-expanded="false">
-              <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Logs</span>
-              </div>
-            </a>
-          </li>
-
-        </ul> -->

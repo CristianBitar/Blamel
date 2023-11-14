@@ -446,7 +446,7 @@ if (!isset($_SESSION['tout'])) {
         Object.entries(selectedFields ?? {})?.forEach((item) => {
             const [key, value] = item ?? [];
             const div = document.querySelector('.'+key);
-
+            console.log(key)
             if(value) {
                 div.classList?.remove('col-6');
                 div.classList?.add('col-12');
@@ -456,7 +456,10 @@ if (!isset($_SESSION['tout'])) {
                 `;
             }
             else {
-                const ifDisable = !lastIndexValue ? 'disabled' : ''
+                const ifDisable =  key === 'parada' ? ''
+                                 : key === 'finalizar_trabajo' ? (!ot?.inicio_trabajo || (ot?.inicio_trabajo && ot?.parada && !ot?.continuar) ? 'disabled' : '')
+                                 : !lastIndexValue ? 'disabled' : '';
+
                 div.classList?.add('col-6');
                 div.innerHTML = `
                     <input class="form-control btn btn-falcon-success ${buttons?.[key]}" type="button" value="Registrar" onclick="${actions?.[key]}()" ${ifDisable}/> 
