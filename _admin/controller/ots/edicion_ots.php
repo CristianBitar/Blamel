@@ -50,6 +50,11 @@
         $contacto=$mysqli -> real_escape_string($_POST['contacto']);
         $materiales = $mysqli->real_escape_string($_POST['materiales']);
         $incidencia = $mysqli->real_escape_string($_POST['incidencia']);
+        $salida_taller = $mysqli->real_escape_string($_POST['salida_taller']);
+        $inicio_trabajo = $mysqli->real_escape_string($_POST['inicio_trabajo']);
+        $parada = $mysqli->real_escape_string($_POST['parada']);
+        $continuar = $mysqli->real_escape_string($_POST['continuar']);
+        $finalizar_trabajo = $mysqli->real_escape_string($_POST['finalizar_trabajo']);
 
         $query = "UPDATE ots 
                   SET nombre = '$nombre', 
@@ -60,7 +65,12 @@
                   telefono = '$telefono', 
                   contacto = '$contacto',
                   materiales = '$materiales',
-                  incidencia = '$incidencia'
+                  incidencia = '$incidencia',
+                  salida_taller = '$salida_taller',
+                  inicio_trabajo = '$inicio_trabajo',
+                  parada = '$parada',
+                  continuar = '$continuar',
+                  finalizar_trabajo = '$finalizar_trabajo'
                     WHERE
                     id = $id";
 

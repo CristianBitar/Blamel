@@ -9,7 +9,7 @@
     }
 
     #collapseExample {
-        margin-top: 20px; 
+        margin-top: 20px;
         height: 800px;
     }
 </style>
@@ -29,7 +29,7 @@
 
             <label class="col-sm-2 col-form-label" for="fecha_hora">Fecha y Hora</label>
             <div class="col-sm-4 row">
-                <input class="form-control" type="text" id="fecha_hora" name="fecha_hora" required disabled/>
+                <input class="form-control" type="text" id="fecha_hora" name="fecha_hora" required disabled />
                 <button type="button" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Ver calendario</button>
                 <div class="mb-3 row"></div>
             </div>
@@ -38,7 +38,7 @@
                 <!-- TABLA GRUPOS POR CURSO  -->
                 <div class="card">
                     <div class="card-body">
-                    <?php include("components/calendario_ots.php"); ?>
+                        <?php include("components/calendario_ots.php"); ?>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@
 
             <label class="col-sm-2 col-form-label text-truncate" for="trabajadores_asignados">Trabajadores asignados</label>
             <div class="col-sm-4">
-                <input class="form-control cursor text-truncate" type="button" id="trabajadores_asignados" name="trabajadores_asignados"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <input class="form-control cursor text-truncate" type="button" id="trabajadores_asignados" name="trabajadores_asignados" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                 <div class="dropdown-menu" aria-labelledby="disabledLinkExample" id="accordion">
                 </div>
                 <div class="mb-3 row"></div>
@@ -97,6 +97,40 @@
                 <div class="mb-3 row"></div>
             </div>
 
+
+            <!-- MODO EDICION  -->
+            <label class="col-sm-2 col-form-label text-truncate disable_item" for="salida_taller">Salida Taller</label>
+            <div class="col-sm-4 disable_item">
+                <input class="form-control datetimepicker" id="salida_taller" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <div class="mb-3 row"></div>
+            </div>
+
+            <label class="col-sm-2 col-form-label text-truncate disable_item" for="inicio_trabajo">Inicio Trabajo</label>
+            <div class="col-sm-4 disable_item">
+                <input class="form-control datetimepicker" id="inicio_trabajo" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <div class="mb-3 row"></div>
+            </div>
+
+            <label class="col-sm-2 col-form-label text-truncate disable_item" for="parada">Parada</label>
+            <div class="col-sm-4 disable_item">
+                <input class="form-control datetimepicker" id="parada" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <div class="mb-3 row"></div>
+            </div>
+
+            <label class="col-sm-2 col-form-label text-truncate disable_item" for="continuar">Continuar</label>
+            <div class="col-sm-4 disable_item">
+                <input class="form-control datetimepicker" id="continuar" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <div class="mb-3 row"></div>
+            </div>
+
+            <label class="col-sm-2 col-form-label text-truncate disable_item" for="finalizar_trabajo">Finalizar trabajo</label>
+            <div class="col-sm-4 disable_item">
+                <input class="form-control datetimepicker" id="finalizar_trabajo" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <div class="mb-3 row"></div>
+            </div>
+            <!-- MODO EDICION  -->
+
+
             <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                     <p></p>
@@ -105,8 +139,6 @@
                     <button type="button" class="btn btn-danger btn-xs deleteBtn" onclick="openDeleteConfirmModal()"><i class="far fa-trash-alt"></i></button>
                 </div>
             </div>
-
-
         </div>
     </div>
 </form>
@@ -156,6 +188,7 @@
         loadSelectors();
 
         if (window.location.href?.includes('alta_ots')) {
+            document.querySelectorAll('.disable_item')?.forEach(item => item?.classList.add('hidden'))
             deleteBtn?.classList.add('hidden');
         }
     })();
@@ -167,10 +200,10 @@
                 fetch(endpoints.searchWorkres),
                 fetch(endpoints.searchStatus),
                 fetch(endpoints.searchClients),
-                ...(otId ? [ fetch(endpoints.searchAssignedWorkersByIdOt(otId)) ] : [])
+                ...(otId ? [fetch(endpoints.searchAssignedWorkersByIdOt(otId))] : [])
             ]);
 
-            workers = await workersResponse?.value.json() ?? []; 
+            workers = await workersResponse?.value.json() ?? [];
             const status = await statusResponse?.value.json() ?? [];
             const clients = await clientsResponse?.value.json() ?? [];
             const workerAssinedSelected = await workerAssinedSelectedResponse?.value?.json();
@@ -182,7 +215,10 @@
                 nombre: item?.estado
             })), clients);
 
-            selectedWorkers = (workerAssinedSelected ?? [])?.reduce((acc, item) => ({...acc, [item?.id]: true}),{});
+            selectedWorkers = (workerAssinedSelected ?? [])?.reduce((acc, item) => ({
+                ...acc,
+                [item?.id]: true
+            }), {});
 
             fillCheckbox(workers);
             fillWorkesInput()
@@ -230,9 +266,9 @@
                 value
             } = field ?? {};
             if (!id || id === 'trabajadores_asignados') return;
-            if(id === 'fecha_hora') {
-                field.value = ots?.['fecha_inicio'] +' / '+ ots?.['fecha_fin'];
-                return 
+            if (id === 'fecha_hora') {
+                field.value = ots?.['fecha_inicio'] + ' / ' + ots?.['fecha_fin'];
+                return
             }
             field.value = ots?.[id] ?? '';
         });
@@ -273,21 +309,21 @@
             });
 
 
-            if(isSaveOrUpdate){
+            if (isSaveOrUpdate) {
                 const idOts = otId ? otId : await response?.json() ?? null;
 
                 const patchValueSelectedWorkresIds = (patchValueSelectedWorkres ?? [])?.map(item => item?.id);
                 const selectedIds = getSelectedId();
                 const savedWorkers = selectedIds?.filter(id => !patchValueSelectedWorkresIds?.includes(id));
-                const deleteWorkes = patchValueSelectedWorkres?.reduce((acc, item) => ([...acc, ...(!selectedIds?.includes(item?.id)) ? [item?.asignacion_id] : []]),[])
-                
-                if(savedWorkers?.length > 0){
+                const deleteWorkes = patchValueSelectedWorkres?.reduce((acc, item) => ([...acc, ...(!selectedIds?.includes(item?.id)) ? [item?.asignacion_id] : []]), [])
+
+                if (savedWorkers?.length > 0) {
                     for (let workerId of savedWorkers ?? []) {
                         await saveWorkersAssigned(endpoints?.saveAssignedWorkers, workerId, idOts ?? otId);
                     }
                 }
 
-                if(deleteWorkes?.length > 0){
+                if (deleteWorkes?.length > 0) {
                     for (let workerAsignedId of deleteWorkes ?? []) {
                         await deleteWorkersAssigned(endpoints?.deleteAssignedWorkers, workerAsignedId);
                     }
@@ -355,7 +391,7 @@
         const accordion = document.querySelector('#accordion');
         (workers ?? [])?.forEach(item => {
             accordion.innerHTML +=
-            `<div class="dropdown-item">
+                `<div class="dropdown-item">
                 <input class="form-check-input checkbox" type="checkbox" value="" id="${item?.id}" ${selectedWorkers?.[item?.id] ? 'checked' : null} onchange="onchangeCheckbox('${item?.id}')">
                 <label class="flex align-items-center" for="${item?.id}">
                     ${ item?.nombre } ${ item?.primer_apellido ?? '' }
@@ -373,19 +409,19 @@
         fillWorkesInput();
     }
 
-    function fillWorkesInput() {    
-        const inputWorkers = document.querySelector('#trabajadores_asignados');    
+    function fillWorkesInput() {
+        const inputWorkers = document.querySelector('#trabajadores_asignados');
         const selectedId = getSelectedId();
 
         const workersSelecteds = (workers ?? [])?.filter(item => selectedId?.includes(item?.id))
         inputWorkers.value = '';
-        (workersSelecteds ?? [])?.forEach((item, idx) => inputWorkers.value += item?.nombre + ' ' + item?.primer_apellido + ( idx < workersSelecteds?.length - 1 ? ', ' : ' '));
+        (workersSelecteds ?? [])?.forEach((item, idx) => inputWorkers.value += item?.nombre + ' ' + item?.primer_apellido + (idx < workersSelecteds?.length - 1 ? ', ' : ' '));
     }
 
     function getSelectedId() {
         return Object.entries(selectedWorkers ?? {})?.reduce((acc, item) => {
             const [id, bool] = item ?? []
-            return [...acc, ...(bool ? [id] : []) ]
+            return [...acc, ...(bool ? [id] : [])]
         }, []);
     }
 
@@ -393,7 +429,7 @@
         $("#addEventModal").modal('toggle');
         fechaInicio = document.querySelector('#startDate').value;
         fechaFin = document.querySelector('#endDate').value;
-        fechaHora.value = fechaInicio +' / '+ fechaFin
+        fechaHora.value = fechaInicio + ' / ' + fechaFin
     }
 
     function updateSubmitButton(pending = false, button) {
