@@ -72,9 +72,9 @@ if (!isset($_SESSION['tout'])) {
                                 <div class="card-body bg-light">
                                     <div class="mb-3 row">
 
-                                        <label class="col-4 col-sm-2 col-form-label" for="id">Nº OT</label>
+                                        <label class="col-4 col-sm-2 col-form-label" for="nombre">Nº OT</label>
                                         <div class="col-8 col-sm-4">
-                                            <input class="form-control" type="text" id="id" name="id" disabled />
+                                            <input class="form-control" type="text" id="nombre" name="nombre" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
 

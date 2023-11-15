@@ -31,7 +31,6 @@
         $_SESSION['tout'] = time();
     }
     
-
     // ************** POST **************
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
@@ -41,28 +40,9 @@
             echo 'Error: id no puede estar vacio ';
         }
 
-        $nombre = $mysqli->real_escape_string($_POST['nombre']);
-        $fecha_inicio=$mysqli -> real_escape_string($_POST['fecha_inicio']);
-        $fecha_fin=$mysqli -> real_escape_string($_POST['fecha_fin']);
-        $cliente = $mysqli->real_escape_string($_POST['cliente']);
-        $direccion = $mysqli->real_escape_string($_POST['direccion']);
-        $telefono = $mysqli->real_escape_string($_POST['telefono']);
-        $contacto=$mysqli -> real_escape_string($_POST['contacto']);
-        $materiales = $mysqli->real_escape_string($_POST['materiales']);
-        $incidencia = $mysqli->real_escape_string($_POST['incidencia']);
-
-        $query = "UPDATE ots 
-                  SET nombre = '$nombre', 
-                  fecha_inicio = '$fecha_inicio',
-                  fecha_fin = '$fecha_fin',
-                  cliente = '$cliente', 
-                  direccion = '$direccion',
-                  telefono = '$telefono', 
-                  contacto = '$contacto',
-                  materiales = '$materiales',
-                  incidencia = '$incidencia'
-                    WHERE
-                    id = $id";
+        $query = "UPDATE trabajadores_asignados 
+                  SET isDeleted = 1
+                 WHERE id = $id";
 
         /* Prepare statement */
         $stmt = $mysqli->prepare($query);

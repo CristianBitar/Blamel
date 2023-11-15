@@ -41,7 +41,7 @@
                     ON ots.id = trabajadores_asignados.id_ots
                     INNER JOIN trabajadores 
                     ON trabajadores.id = trabajadores_asignados.id_trabajador
-                    WHERE trabajadores.id = '$sesion_id' AND ots.isDeleted = 0 
+                    WHERE trabajadores.id = '$sesion_id' AND ots.isDeleted = 0 AND trabajadores_asignados.isDeleted = 0 
                     ORDER BY ots.id ASC";
 
 

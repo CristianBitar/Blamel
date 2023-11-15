@@ -43,7 +43,7 @@
         $telefono = $mysqli->real_escape_string($_POST['telefono']);
         $contacto=$mysqli -> real_escape_string($_POST['contacto']);
         $materiales = $mysqli->real_escape_string($_POST['materiales']);
-        $notas = $mysqli->real_escape_string($_POST['notas']);
+        $incidencia = $mysqli->real_escape_string($_POST['incidencia']);
 
         $query = "INSERT INTO ots (
         id, 
@@ -56,7 +56,7 @@
         telefono, 
         contacto, 
         materiales, 
-        notas, 
+        incidencia, 
         fecha_alta) VALUES 
                     (NULL,
                     '$nombre',
@@ -68,7 +68,7 @@
                     '$telefono', 
                     '$contacto',
                     '$materiales',
-                    '$notas',
+                    '$incidencia',
                     NOW());";
 
         /* Prepare statement */

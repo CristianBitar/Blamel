@@ -4,7 +4,7 @@
   <a class="navbar-brand me-1 me-sm-3" href="../index.html">
     <div class="d-flex align-items-center">
       <img class="me-2" src="<?php echo $logo ?>" alt="" width="60" />
-      <span class="font-sans-serif"><?php echo nombreempresa . ' '; ?></span>
+      <!-- <span class="font-sans-serif"><?php echo nombreempresa . ' '; ?></span> -->
     </div>
   </a>
 

@@ -161,10 +161,10 @@ if (!isset($_SESSION['tout'])) {
         }
         
         (ots ?? [])?.forEach(item => {
-            const { id, fecha_inicio } = item ?? {};
+            const { id, nombre, fecha_inicio } = item ?? {};
             dueTable.innerHTML += `
                 <tr onclick="gotToOt(${id})">
-                    <td>${id ?? '-'}</td>
+                    <td>${nombre ?? '-'}</td>
                     <td>${fecha_inicio ?? '-'}</td>
                 </tr>
             `;

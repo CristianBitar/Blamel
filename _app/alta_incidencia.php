@@ -71,9 +71,9 @@ if (!isset($_SESSION['tout'])) {
                                 <div class="card-body bg-light">
                                     <div class="mb-3 row">
 
-                                        <label class="col-4 col-sm-2 col-form-label" for="id">Nº OT</label>
+                                        <label class="col-4 col-sm-2 col-form-label" for="nombre">Nº OT</label>
                                         <div class="col-8 col-sm-4">
-                                            <input class="form-control" type="text" id="id" name="id" disabled />
+                                            <input class="form-control" type="text" id="nombre" name="nombre" disabled />
                                             <div class="mb-3 row"></div>
                                         </div>
 
@@ -126,7 +126,7 @@ if (!isset($_SESSION['tout'])) {
 <script type="text/javascript">
     const [_, otId] = window.location.href?.split('id=') ?? [];
     const saveBtn = document.querySelector('.saveBtn');
-    const nameInput = document.querySelector('#id');
+    const nameInput = document.querySelector('#nombre');
     const incidenceTextArea = document.querySelector('#incidencia');
     const redirectToList = './listado_ots';
     const goToDetail = './edicion_ot?id=' + otId;
@@ -172,7 +172,7 @@ if (!isset($_SESSION['tout'])) {
     }
 
     function patchForm(ots) {
-        nameInput.value = ots?.id;
+        nameInput.value = ots?.nombre;
         incidenceTextArea.value = ots?.incidencia;
     }
 

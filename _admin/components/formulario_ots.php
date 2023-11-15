@@ -16,7 +16,6 @@
 <!-- END STYLES  -->
 
 
-
 <!-- START HTML  -->
 <form id="alta_ticket" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data" onsubmit="submitForm(event)">
     <div class="card-body bg-light">
@@ -60,15 +59,16 @@
                 <div class="mb-3 row"></div>
             </div>
 
-            <label class="col-sm-3 col-form-label" for="trabajadores_asignados">Trabajadores asignados</label>
-            <div class="col-sm-9">
-                <select class="form-select" id="trabajadores_asignados" name="trabajadores_asignados" required>
-                </select>
+            <label class="col-sm-2 col-form-label text-truncate" for="trabajadores_asignados">Trabajadores asignados</label>
+            <div class="col-sm-4">
+                <input class="form-control cursor text-truncate" type="button" id="trabajadores_asignados" name="trabajadores_asignados"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+                <div class="dropdown-menu" aria-labelledby="disabledLinkExample" id="accordion">
+                </div>
                 <div class="mb-3 row"></div>
             </div>
 
             <label class="col-sm-2 col-form-label" for="direccion">Dirección</label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <input class="form-control" type="text" id="direccion" name="direccion" required />
                 <div class="mb-3 row"></div>
             </div>
@@ -91,9 +91,9 @@
                 <div class="mb-3 row"></div>
             </div>
 
-            <label class="col-sm-12 col-form-label" for="notas">Notas / Incidencias</label>
+            <label class="col-sm-12 col-form-label" for="incidencia">Notas / Incidencias</label>
             <div class="col-sm-12">
-                <textarea class="form-control" type="date" id="notas" name="notas" value=""></textarea>
+                <textarea class="form-control" type="date" id="incidencia" name="incidencia" value=""></textarea>
                 <div class="mb-3 row"></div>
             </div>
 
@@ -124,13 +124,17 @@
     const textarea = form.querySelectorAll('textarea');
     const select = form.querySelectorAll('select');
     const fechaHora = document.querySelector('#fecha_hora')
-
+    let selectedWorkers = {};
+    let workers = [];
+    let patchValueSelectedWorkres = [];
     let otsName = '-';
     let fechaInicio = '-';
     let fechaFin = '-'
     const redirectToList = './listado_ots';
     const endpoints = {
-        searchAssignedWorkers: './controller/trabajador/buscar_trabajadores_listado.php',
+        searchWorkres: './controller/trabajador/buscar_trabajadores_listado.php',
+        searchAssignedWorkersByIdOt: (id) => './controller/trabajadores_asignados/buscar_trabajadores_asignados_por_id_ot.php?id=' + id,
+        deleteAssignedWorkers: './controller/trabajadores_asignados/borrar_trabajadores_asignados.php',
         saveAssignedWorkers: './controller/trabajadores_asignados/alta_trabajador_asignado.php',
         searchStatus: './controller/estado/buscar_estados_listado.php',
         searchClients: './controller/cliente/buscar_clientes_listado.php',
@@ -159,20 +163,29 @@
 
     async function loadSelectors() {
         try {
-            const [workerAssinedResponse, statusResponse, clientsResponse] = await Promise.allSettled([
-                fetch(endpoints.searchAssignedWorkers),
+            const [workersResponse, statusResponse, clientsResponse, workerAssinedSelectedResponse] = await Promise.allSettled([
+                fetch(endpoints.searchWorkres),
                 fetch(endpoints.searchStatus),
                 fetch(endpoints.searchClients),
+                ...(otId ? [ fetch(endpoints.searchAssignedWorkersByIdOt(otId)) ] : [])
             ]);
-            const workersAssigned = await workerAssinedResponse?.value.json() ?? []; //TODO CURSOS ACTIVOS
+
+            workers = await workersResponse?.value.json() ?? []; 
             const status = await statusResponse?.value.json() ?? [];
             const clients = await clientsResponse?.value.json() ?? [];
-            // workersSelecteds = workersAssigned?.reduce((acc, item) => ({...acc, [item?.id]: false}), {});
+            const workerAssinedSelected = await workerAssinedSelectedResponse?.value?.json();
 
-            fillSelectors(workersAssigned, status?.map(item => ({
+            patchValueSelectedWorkres = [...workerAssinedSelected ?? []];
+
+            fillSelectors(status?.map(item => ({
                 ...item,
                 nombre: item?.estado
             })), clients);
+
+            selectedWorkers = (workerAssinedSelected ?? [])?.reduce((acc, item) => ({...acc, [item?.id]: true}),{});
+
+            fillCheckbox(workers);
+            fillWorkesInput()
 
             if (otId) { //CARGAR USUARIO POR LA ASINCRONIA
                 searchItem(otId);
@@ -181,7 +194,8 @@
             setTimeout(() => {
                 $("#errroModal").modal('show')
             }, 500);
-            fillSelectors([], [], []);
+            fillSelectors([], []);
+            fillCheckbox([]);
         }
     }
 
@@ -215,7 +229,7 @@
                 id,
                 value
             } = field ?? {};
-            if (!id) return;
+            if (!id || id === 'trabajadores_asignados') return;
             if(id === 'fecha_hora') {
                 field.value = ots?.['fecha_inicio'] +' / '+ ots?.['fecha_fin'];
                 return 
@@ -235,7 +249,8 @@
                 value,
             } = field ?? {};
             if (!id) return;
-            if (['trabajadores_asignados', 'fecha_hora'].includes(id)) return;
+            if (['trabajadores_asignados', 'fecha_hora', 'startDate', 'endDate'].includes(id)) return;
+
             formData.append(id, value);
         });
 
@@ -245,7 +260,8 @@
         if (otId) formData.append('id', otId);
 
         const endpoint = otId ? endpoints.update : endpoints.save;
-        callService(formData, endpoint, saveBtn, true,);
+
+        callService(formData, endpoint, saveBtn, true, otId);
     }
 
     async function callService(formData, url, button, redirect = true, isSaveOrUpdate = true) {
@@ -258,15 +274,22 @@
 
 
             if(isSaveOrUpdate){
-                const idOts = await response?.json() ?? null;
+                const idOts = otId ? otId : await response?.json() ?? null;
 
-                for (let option of document.querySelector('#trabajadores_asignados')?.options ?? []) {
-                    const {
-                        value,
-                        selected
-                    } = option ?? {};
-                    if (selected) {
-                        await saveWorkersAssigned(endpoints?.saveAssignedWorkers, value, idOts ?? otId);
+                const patchValueSelectedWorkresIds = (patchValueSelectedWorkres ?? [])?.map(item => item?.id);
+                const selectedIds = getSelectedId();
+                const savedWorkers = selectedIds?.filter(id => !patchValueSelectedWorkresIds?.includes(id));
+                const deleteWorkes = patchValueSelectedWorkres?.reduce((acc, item) => ([...acc, ...(!selectedIds?.includes(item?.id)) ? [item?.asignacion_id] : []]),[])
+                
+                if(savedWorkers?.length > 0){
+                    for (let workerId of savedWorkers ?? []) {
+                        await saveWorkersAssigned(endpoints?.saveAssignedWorkers, workerId, idOts ?? otId);
+                    }
+                }
+
+                if(deleteWorkes?.length > 0){
+                    for (let workerAsignedId of deleteWorkes ?? []) {
+                        await deleteWorkersAssigned(endpoints?.deleteAssignedWorkers, workerAsignedId);
                     }
                 }
             }
@@ -301,14 +324,20 @@
         });
     }
 
-    function fillSelectors(workedAssigned, status, clients) {
+    async function deleteWorkersAssigned(url, id) {
+        const formData = new FormData();
+        formData.append('id', id);
+        return await fetch(url, {
+            method: 'post',
+            body: formData
+        });
+    }
+
+    function fillSelectors(status, clients) {
         const clientSelector = document.querySelector('#cliente');
         const statusSelector = document.querySelector('#estado');
-        const workedAssignedSelector = document.querySelector('#trabajadores_asignados'); //TODO
-
         clientSelector.innerHTML += clients?.length > 0 ? fillSelectorOptions(clients) : '<option value="null"> --No hay datos-- </option>';
         statusSelector.innerHTML += status?.length > 0 ? fillSelectorOptions(status) : '<option value="null"> --No hay datos-- </option>';
-        workedAssignedSelector.innerHTML += workedAssigned?.length > 0 ? fillSelectorOptions(workedAssigned) : '<option value="null"> --No hay datos-- </option>';
     }
 
     function fillSelectorOptions(items) {
@@ -320,6 +349,44 @@
             const label = nombre;
             return `<option value="${id}">${label ?? '-'}</option>`
         })?.join(',')?.replace(/,/g, '')
+    }
+
+    function fillCheckbox(workers) {
+        const accordion = document.querySelector('#accordion');
+        (workers ?? [])?.forEach(item => {
+            accordion.innerHTML +=
+            `<div class="dropdown-item">
+                <input class="form-check-input checkbox" type="checkbox" value="" id="${item?.id}" ${selectedWorkers?.[item?.id] ? 'checked' : null} onchange="onchangeCheckbox('${item?.id}')">
+                <label class="flex align-items-center" for="${item?.id}">
+                    ${ item?.nombre } ${ item?.primer_apellido ?? '' }
+                </label>
+            </div>`;
+        })
+    }
+
+    function onchangeCheckbox(workerId) {
+        selectedWorkers = {
+            ...selectedWorkers,
+            [workerId]: !selectedWorkers?.[workerId]
+        };
+
+        fillWorkesInput();
+    }
+
+    function fillWorkesInput() {    
+        const inputWorkers = document.querySelector('#trabajadores_asignados');    
+        const selectedId = getSelectedId();
+
+        const workersSelecteds = (workers ?? [])?.filter(item => selectedId?.includes(item?.id))
+        inputWorkers.value = '';
+        (workersSelecteds ?? [])?.forEach((item, idx) => inputWorkers.value += item?.nombre + ' ' + item?.primer_apellido + ( idx < workersSelecteds?.length - 1 ? ', ' : ' '));
+    }
+
+    function getSelectedId() {
+        return Object.entries(selectedWorkers ?? {})?.reduce((acc, item) => {
+            const [id, bool] = item ?? []
+            return [...acc, ...(bool ? [id] : []) ]
+        }, []);
     }
 
     function getDate() {
