@@ -49,7 +49,7 @@
         $telefono = $mysqli->real_escape_string($_POST['telefono']);
         $contacto=$mysqli -> real_escape_string($_POST['contacto']);
         $materiales = $mysqli->real_escape_string($_POST['materiales']);
-        $incidencia = $mysqli->real_escape_string($_POST['incidencia']);
+        $notas = $mysqli->real_escape_string($_POST['notas']);
         $salida_taller = $mysqli->real_escape_string($_POST['salida_taller']);
         $inicio_trabajo = $mysqli->real_escape_string($_POST['inicio_trabajo']);
         $parada = $mysqli->real_escape_string($_POST['parada']);
@@ -65,7 +65,7 @@
                   telefono = '$telefono', 
                   contacto = '$contacto',
                   materiales = '$materiales',
-                  incidencia = '$incidencia',
+                  notas = '$notas',
                   salida_taller = '$salida_taller',
                   inicio_trabajo = '$inicio_trabajo',
                   parada = '$parada',

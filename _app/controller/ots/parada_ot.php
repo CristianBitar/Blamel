@@ -36,6 +36,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $id=$mysqli -> real_escape_string($_POST['id']);
+        $motivo_parada=$mysqli -> real_escape_string($_POST['motivo_parada']);
         
         if(!$id){
             echo 'Error: id no puede estar vacio ';
@@ -44,7 +45,8 @@
         // $parada = $mysqli->real_escape_string($_POST['parada']);
 
         $query = "UPDATE ots 
-                  SET parada = NOW()
+                  SET parada = NOW(),
+                  motivo_parada = '$motivo_parada'
                     WHERE
                     id = $id";
 

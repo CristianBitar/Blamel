@@ -119,9 +119,9 @@ if (!isset($_SESSION['tout'])) {
                                             <!-- <div class="mb-3 row"></div> -->
                                         </div>
 
-                                        <label class="col-sm-12 col-form-label" for="motivo">Motivo</label>
+                                        <label class="col-sm-12 col-form-label" for="motivo_parada">Motivo</label>
                                         <div class="col-sm-12">
-                                            <textarea class="form-control" rows="4" id="motivo" name="motivo" value="" disabled></textarea>
+                                            <textarea class="form-control" rows="4" id="motivo_parada" name="motivo_parada" value=""></textarea>
                                             <div class="mb-3 row"></div>
                                         </div>
 
@@ -211,7 +211,8 @@ if (!isset($_SESSION['tout'])) {
     const inputs = form.querySelectorAll('input');
     const textarea = form.querySelectorAll('textarea');
     const select = form.querySelectorAll('select');
-    const fechaHora = document.querySelector('#fecha_hora')
+    const fechaHora = document.querySelector('#fecha_hora');
+    const stopReason = document.querySelector('#motivo_parada');
     const redirectToList = './listado_ots';
     const redirectToDetail = './detalle_ot?id=' + otId;
     const redirectToIncidence = './alta_incidencia?id=' + otId;
@@ -393,6 +394,7 @@ if (!isset($_SESSION['tout'])) {
         const stopBtn = document.querySelector('.stopBtn');
         const formData = new FormData();
         formData.append('id', otId);
+        formData.append('motivo_parada', stopReason.value);
         callService(formData, endpoints.updateStop, stopBtn, false, false, true);
     }
 
@@ -448,6 +450,8 @@ if (!isset($_SESSION['tout'])) {
             const div = document.querySelector('.'+key);
 
             if(value) {
+                if(key === 'parada')  stopReason.disabled = true;
+                
                 div.classList?.remove('col-6');
                 div.classList?.add('col-12');
                 div.innerHTML = `

@@ -50,6 +50,33 @@ include('./controller/ots/buscar_otss.php');
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <?php include("includes/Stylesheets.php"); ?>
+
+    <style>
+        .badge-subtle-primary {
+            background: #D9E7FA;
+            color: #5684C3;
+        }
+
+        .badge-subtle-secondary {
+            background: #E6E8EC;
+            color: #616B79;
+        }
+
+        .badge-subtle-success {
+            background: #D9F8EB;
+            color: #00894F;
+        }
+
+        .badge-subtle-warning {
+            background: #FDE6D8;
+            color: #AC5A2B;
+        }
+
+        .badge-subtle-danger {
+            background: #FBDBE1;
+            color: #CB5F72;
+        }
+    </style>
 </head>
 
 <body>
@@ -77,7 +104,7 @@ include('./controller/ots/buscar_otss.php');
                                     </div>
                                     <div class="col-auto ms-auto">
                                         <div class="nav nav-pills nav-pills-falcon flex-grow-1" role="tablist">
-                                            <a href="./alta_ots" class="btn btn-falcon-success btn-sm" type="button"><span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span> <span class="ms-1">Nuevo OTS</span></a>
+                                            <a href="./alta_ots" class="btn btn-falcon-success btn-sm" type="button"><span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span> <span class="ms-1">Nueva OT</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -93,33 +120,46 @@ include('./controller/ots/buscar_otss.php');
                                     <table id="userTable" class="table mb-0 data-table fs--1">
                                         <thead class="bg-200 text-900">
                                             <tr>
-                                                <th class="sort" data-sort="nombre">Nombre</th>
-                                                <th class="sort" data-sort="fecha_inicio">Fecha y hora</th>
+                                                <th class="sort" data-sort="nombre">Nº OT</th>
+                                                <th class="sort" data-sort="fecha_inicio">Fecha de inicio</th>
                                                 <th class="sort" data-sort="cliente">cliente</th>
-                                                <th class="sort" data-sort="direccion">Dirección</th>
                                                 <th class="sort" data-sort="telefono">Teléfono</th>
+                                                <th class="sort" data-sort="estado">Estado</th>
+        
                                                 <th class="sort"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="tBody">
-                                            <?php
-                                            for ($recorrer = 0; $recorrer < count($listado_ots); $recorrer++) {
-                                            ?>
+                                            <?php  for ($recorrer = 0; $recorrer < count($listado_ots); $recorrer++) { ?>
                                                 <tr>
                                                     <td class="nombre"><?php echo $listado_ots[$recorrer]['nombre']; ?></td>
                                                     <td class="fecha_inicio"><?php echo $listado_ots[$recorrer]['fecha_inicio']; ?></td>
                                                     <td class="cliente"><?php echo $listado_ots[$recorrer]['cliente']; ?></td>
-                                                    <td class="direccion"><?php echo $listado_ots[$recorrer]['direccion']; ?></td>
                                                     <td class="telefono"><?php echo $listado_ots[$recorrer]['telefono']; ?></td>
+                                                    <td class="estado">                                                   
+                                                        <?php
+                                                            if ($listado_ots[$recorrer]['estadoId'] == 1) {
+                                                                echo '<span class="badge badge-subtle-success">'. $listado_ots[$recorrer]['estado'] .'</span>';
+                                                            } elseif ($listado_ots[$recorrer]['estadoId'] == 2) {
+                                                                echo '<span class="badge badge-subtle-warning">'. $listado_ots[$recorrer]['estado'] .'</span>';
+                                                            } elseif ($listado_ots[$recorrer]['estadoId'] == 3) {
+                                                                echo '<span class="badge badge-subtle-danger">'. $listado_ots[$recorrer]['estado'] .'</span>';
+                                                            } elseif ($listado_ots[$recorrer]['estadoId'] == 4) {
+                                                                echo '<span class="badge badge-subtle-primary">'. $listado_ots[$recorrer]['estado'] .'</span>';
+                                                            } elseif ($listado_ots[$recorrer]['estadoId'] == 5) {
+                                                                echo '<span class="badge badge-subtle-secondary">'. $listado_ots[$recorrer]['estado'] .'</span>';
+                                                            } else {
+                                                                echo $listado_ots[$recorrer]['estado'];
+                                                            }
+                                                        ?>
+                                                    </td>
                                                     <td class="text-end">
                                                         <div>
                                                             <a href="./editar_ots?id=<?php echo $listado_ots[$recorrer]['id']; ?>" target='_self' class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver"><span class="text-500 fas fa-edit"></span></a>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            <?php
-                                            }
-                                            ?>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>

@@ -12,6 +12,42 @@
         margin-top: 20px;
         height: 800px;
     }
+
+    #calendar {
+        max-width: 1100px;
+        width: 100%;
+        height: 800px;
+        margin: 40px auto;
+    }
+
+    .fc .fc-daygrid-dot-event {
+        color: blue !important;
+    }
+
+    .badge-subtle-primary {
+        background: #D9E7FA;
+        color: #5684C3;
+    }
+
+    .badge-subtle-secondary {
+        background: #E6E8EC;
+        color: #616B79;
+    }
+
+    .badge-subtle-success {
+        background: #D9F8EB;
+        color: #00894F;
+    }
+
+    .badge-subtle-warning {
+        background: #FDE6D8;
+        color: #AC5A2B;
+    }
+
+    .badge-subtle-danger {
+        background: #FBDBE1;
+        color: #CB5F72;
+    }
 </style>
 <!-- END STYLES  -->
 
@@ -28,21 +64,16 @@
             </div>
 
             <label class="col-sm-2 col-form-label" for="fecha_hora">Fecha y Hora</label>
-            <div class="col-sm-4 row">
+            <div class="col-sm-4">
                 <input class="form-control" type="text" id="fecha_hora" name="fecha_hora" required disabled />
-                <button type="button" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Ver calendario</button>
+                <input type="button" class="btn btn-primary calendarBtn" onclick="showCalendar()" value="Ver calendario"></input>
                 <div class="mb-3 row"></div>
             </div>
 
-            <div class="collapse" id="collapseExample">
-                <!-- TABLA GRUPOS POR CURSO  -->
-                <div class="card">
-                    <div class="card-body">
-                        <?php include("components/calendario_ots.php"); ?>
-                    </div>
+            <div class="card card-calendar">
+                <div class="card-body">
+                    <div id='calendar'></div>
                 </div>
-
-                <!-- END HTML  -->
             </div>
 
             <label class="col-sm-2 col-form-label" for="cliente">Cliente</label>
@@ -54,7 +85,7 @@
 
             <label class="col-sm-2 col-form-label" for="estado">Estado</label>
             <div class="col-sm-4">
-                <select class="form-select" id="estado" name="estado" required>
+                <select class="form-select" id="estado" name="estado" required onchange="changeStatus()">
                 </select>
                 <div class="mb-3 row"></div>
             </div>
@@ -75,7 +106,7 @@
 
             <label class="col-sm-2 col-form-label" for="telefono">Teléfono</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" id="telefono" name="telefono" required />
+                <input class="form-control" type="text" id="telefono" name="telefono" pattern="^[+]?[0-9]{9,12}$" required />
                 <div class="mb-3 row"></div>
             </div>
 
@@ -91,9 +122,9 @@
                 <div class="mb-3 row"></div>
             </div>
 
-            <label class="col-sm-12 col-form-label" for="incidencia">Notas / Incidencias</label>
+            <label class="col-sm-12 col-form-label" for="notas">Notas / Incidencias</label>
             <div class="col-sm-12">
-                <textarea class="form-control" type="date" id="incidencia" name="incidencia" value=""></textarea>
+                <textarea class="form-control" type="date" id="notas" name="notas" value=""></textarea>
                 <div class="mb-3 row"></div>
             </div>
 
@@ -101,31 +132,37 @@
             <!-- MODO EDICION  -->
             <label class="col-sm-2 col-form-label text-truncate disable_item" for="salida_taller">Salida Taller</label>
             <div class="col-sm-4 disable_item">
-                <input class="form-control datetimepicker" id="salida_taller" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <input class="form-control datetimepicker" id="salida_taller" type="text" placeholder="d/m/y H:i" data-options='{"static":"true","enableTime":"true","dateFormat":"Y-m-d H:i"}' />
                 <div class="mb-3 row"></div>
             </div>
 
             <label class="col-sm-2 col-form-label text-truncate disable_item" for="inicio_trabajo">Inicio Trabajo</label>
             <div class="col-sm-4 disable_item">
-                <input class="form-control datetimepicker" id="inicio_trabajo" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <input class="form-control datetimepicker" id="inicio_trabajo" type="text" placeholder="d/m/y H:i" data-options='{"static":"true","enableTime":"true","dateFormat":"Y-m-d H:i"}' />
                 <div class="mb-3 row"></div>
             </div>
 
             <label class="col-sm-2 col-form-label text-truncate disable_item" for="parada">Parada</label>
             <div class="col-sm-4 disable_item">
-                <input class="form-control datetimepicker" id="parada" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <input class="form-control datetimepicker" id="parada" type="text" placeholder="d/m/y H:i" data-options='{"static":"true","enableTime":"true","dateFormat":"Y-m-d H:i"}' />
                 <div class="mb-3 row"></div>
             </div>
 
             <label class="col-sm-2 col-form-label text-truncate disable_item" for="continuar">Continuar</label>
             <div class="col-sm-4 disable_item">
-                <input class="form-control datetimepicker" id="continuar" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <input class="form-control datetimepicker" id="continuar" type="text" placeholder="d/m/y H:i" data-options='{"static":"true","enableTime":"true","dateFormat":"Y-m-d H:i"}' />
                 <div class="mb-3 row"></div>
             </div>
 
             <label class="col-sm-2 col-form-label text-truncate disable_item" for="finalizar_trabajo">Finalizar trabajo</label>
             <div class="col-sm-4 disable_item">
-                <input class="form-control datetimepicker" id="finalizar_trabajo" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                <input class="form-control datetimepicker" id="finalizar_trabajo" type="text" placeholder="d/m/y H:i" data-options='{"static":"true","enableTime":"true","dateFormat":"Y-m-d H:i"}' />
+                <div class="mb-3 row"></div>
+            </div>
+
+            <label class="col-sm-12 col-form-label text-truncate disable_item" for="motivo_parada">Motivo de parada</label>
+            <div class="col-sm-12 disable_item">
+                <textarea class="form-control" type="date" id="motivo_parada" name="motivo_parada" value=""></textarea>
                 <div class="mb-3 row"></div>
             </div>
             <!-- MODO EDICION  -->
@@ -151,17 +188,27 @@
     const [_, otId] = window.location.href?.split('id=') ?? [];
     const saveBtn = document.querySelector('.saveBtn');
     const deleteBtn = document.querySelector('.deleteBtn');
+    const cardCalendar = document.querySelector('.card-calendar');
+    const calendarBtn = document.querySelector('.calendarBtn');
+    const clientSelector = document.querySelector('#cliente');
+    const statusSelector = document.querySelector('#estado');
     const form = document.querySelector('form'); //FORM IMPUTS
     const inputs = form.querySelectorAll('input');
     const textarea = form.querySelectorAll('textarea');
     const select = form.querySelectorAll('select');
-    const fechaHora = document.querySelector('#fecha_hora')
+    const fechaHora = document.querySelector('#fecha_hora');
+    const startDate = document.querySelector('#startDate');
+    const endDate = document.querySelector('#endDate');
+    const titulo = document.querySelector('#titulo');
+    const modalInitDate = document.querySelector('#modalInitDate');
+    const modalEndDate = document.querySelector('#modalEndDate');
+
+    let showCalendarCard = false;
     let selectedWorkers = {};
     let workers = [];
     let patchValueSelectedWorkres = [];
     let otsName = '-';
-    let fechaInicio = '-';
-    let fechaFin = '-'
+    let calendarDate = null;
     const redirectToList = './listado_ots';
     const endpoints = {
         searchWorkres: './controller/trabajador/buscar_trabajadores_listado.php',
@@ -176,18 +223,110 @@
         delete: './controller/ots/borrar_ots.php'
     };
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('calendar');
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            selectable: true,
+            timeZone: 'Europe/Madrid',
+            themeSystem: 'bootstrap5',
+            locale:'es',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                // right: 'dayGridMonth'
+            },
+            buttonText: {
+                today: 'Hoy',
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día'
+            },
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                try {
+                    const response = await fetch('./controller/ots/buscar_ots_listado.php');
+                    const ots = await response?.json();
+
+                    const events = (ots ?? [])?.map(item => {
+                        const {
+                            id: groupId,
+                            nombre: title,
+                            fecha_inicio,
+                            fecha_fin
+                        } = item ?? {};
+                        return {
+                            groupId,
+                            title,
+                            start: fecha_inicio?.replace(/ /g, 'T'),
+                            ...(fecha_fin ? {
+                                end: fecha_fin?.replace(/ /g, 'T')
+                            } : {})
+                        }
+                    })
+                    successCallback(events);
+                } catch (error) {
+                    failureCallback([]);
+                }
+            },
+            eventClick: function(info) {
+                const { start, end } = info?.event ?? {};
+                titulo.value = info?.event?._def?.title ?? '-';
+                modalInitDate.value = parseDate(start?.toISOString())
+                modalEndDate.value = parseDate(end?.toISOString())
+                $("#eventDetailsModal").modal('show');
+            },
+            dayMaxEventRows: true, 
+            views: {
+                day: {
+                    dayMaxEventRows: 3 // Ajusta el número de filas de eventos por día según tus necesidades
+                }
+            },
+            firstDay: 1,
+            eventColor: '#D9E7FA',
+            eventTextColor: 'blue',
+            dateClick: function(info) {
+                const [date]  = info.date.toISOString()?.split('T') ?? [];
+
+                $('#startDate').datetimepicker({
+                    format: 'YYYY-MM-DD HH:mm',
+                    defaultDate: new Date(date),
+                    // onSelect: function (date) {
+                    //     $('#startDate').val(date).attr('readonly', true); // if you want to make event fire after the date selection
+                    // }
+                    // locale: 'es'
+                });
+
+                $('#endDate').datetimepicker({
+                    format: 'YYYY-MM-DD HH:mm',
+                    // locale: 'es' 
+                });
+
+                $("#addEventModal").modal('show');
+            }
+        });
+
+        calendar.render();
+    });
 
 
     // // ********************** CONSTRUCTOR **********************
     (function onInit() {
+        setTimeout(() => {
+            cardCalendar.classList?.['add']('hidden');
+        },1000)
+        
         if (window.location.href?.includes('editar_ots') && !otId) {
             window.location.href = redirectToList;
             return
         }
-
         loadSelectors();
 
-        if (window.location.href?.includes('alta_ots')) {
+        if(window.location.href?.includes('editar_ots')){
+            document.querySelector('#nombre').disabled = true;
+        }
+
+        if (window.location.href?.includes('alta_ots')) {  
             document.querySelectorAll('.disable_item')?.forEach(item => item?.classList.add('hidden'))
             deleteBtn?.classList.add('hidden');
         }
@@ -265,13 +404,19 @@
                 id,
                 value
             } = field ?? {};
+
             if (!id || id === 'trabajadores_asignados') return;
+            
             if (id === 'fecha_hora') {
                 field.value = ots?.['fecha_inicio'] + ' / ' + ots?.['fecha_fin'];
                 return
             }
+
             field.value = ots?.[id] ?? '';
         });
+        startDate.value = ots?.['fecha_inicio'] ?? '';
+        endDate.value = ots?.['fecha_fin'] ?? '';
+        changeStatus();
     }
 
     async function submitForm(event) {
@@ -290,8 +435,8 @@
             formData.append(id, value);
         });
 
-        formData.append('fecha_inicio', fechaInicio);
-        formData.append('fecha_fin', fechaFin);
+        formData.append('fecha_inicio', startDate.value);
+        formData.append('fecha_fin', endDate.value);
 
         if (otId) formData.append('id', otId);
 
@@ -335,8 +480,11 @@
         } catch (error) {
             $("#errroModal").modal('show');
             updateSubmitButton(false, button);
-            console.log(error)
         }
+    }
+
+    function showDateModal() {
+        $("#addEventModal").modal('show');
     }
 
     function openDeleteConfirmModal() {
@@ -370,19 +518,22 @@
     }
 
     function fillSelectors(status, clients) {
-        const clientSelector = document.querySelector('#cliente');
-        const statusSelector = document.querySelector('#estado');
         clientSelector.innerHTML += clients?.length > 0 ? fillSelectorOptions(clients) : '<option value="null"> --No hay datos-- </option>';
-        statusSelector.innerHTML += status?.length > 0 ? fillSelectorOptions(status) : '<option value="null"> --No hay datos-- </option>';
+        statusSelector.innerHTML += status?.length > 0 ? fillSelectorOptions(status, true) : '<option value="null"> --No hay datos-- </option>';
+        if(!otId){
+            changeStatus();
+        }
     }
 
-    function fillSelectorOptions(items) {
+    function fillSelectorOptions(items, isStatus = false) {
         return (items ?? [])?.map(item => {
             const {
                 id,
                 nombre,
             } = item ?? {};
             const label = nombre;
+
+            if(isStatus) return `<option value="${id}" class="${ getStatusClass(id) }"> ${ label ?? '-' } </option>`
             return `<option value="${id}">${label ?? '-'}</option>`
         })?.join(',')?.replace(/,/g, '')
     }
@@ -425,11 +576,23 @@
         }, []);
     }
 
+    function getStatusClass(id) {
+        return {
+            1: 'badge-subtle-success',
+            2: 'badge-subtle-warning',
+            3: 'badge-subtle-danger',
+            4: 'badge-subtle-primary',
+            5: 'badge-subtle-secondary'
+        }?.[id] ?? 5
+    }
+
     function getDate() {
+        if(!startDate.value || !endDate.value) return ;
+
         $("#addEventModal").modal('toggle');
-        fechaInicio = document.querySelector('#startDate').value;
-        fechaFin = document.querySelector('#endDate').value;
-        fechaHora.value = fechaInicio + ' / ' + fechaFin
+        fechaHora.value = startDate.value + ' / ' + endDate.value;
+        showCalendarCard = false;
+        cardCalendar.classList?.['add']('hidden');
     }
 
     function updateSubmitButton(pending = false, button) {
@@ -437,5 +600,39 @@
         if (pending) button.setAttribute('disabled', true)
         else button.removeAttribute('disabled')
     }
+
+    function showCalendar() {
+        showCalendarCard = !showCalendarCard;
+        calendarBtn.value = showCalendarCard ? 'Cerrar calendario' : 'Ver calendario'
+        cardCalendar.classList?.[showCalendarCard ? 'remove' : 'add']('hidden');
+    }
+
+    function changeStartDate() {
+        $('#endDate').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            minDate: new Date(startDate.value)
+        });
+    }
+
+    function changeEndDate() {
+        $('#startDate').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            maxDate: endDate.value ? new Date(endDate.value) : null
+        });
+    }
+    
+    function parseDate(totalDate) {
+        const [date, totalHour] = totalDate?.split('T');
+        const hour = totalHour?.split(':')?.slice(0,-1)?.join(':')
+        return date +' '+ hour;
+    }
+
+    function changeStatus(){
+        statusSelector.classList?.forEach(classItem => {
+            statusSelector.classList.remove(classItem)
+        });
+        statusSelector.classList.add('form-select')
+        statusSelector.classList.add(getStatusClass(statusSelector.value))
+    }
+    
 </script>
-<!-- END SCRIPTS  -->
